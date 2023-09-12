@@ -15,19 +15,19 @@
               </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Transaksi Kasir
+                    Master
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">Barang Masuk</a></li>
-                    <li><a class="dropdown-item" href="#">Barang Keluar</a></li>
-                    <li><a class="dropdown-item" href="#">Barang Return</a></li>
+                    <li><a class="dropdown-item" href="#">Materi</a></li>
+                    <li><a class="dropdown-item" href="#">Latihan</a></li>
+                    <li><a class="dropdown-item" href="#">Permainan</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Stok</a>
+                <a class="nav-link" href="#">Siswa</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Laporan</a>
+                <a class="nav-link" href="#">Nilai Siswa</a>
             </li>
         </ul>
         </div>
@@ -55,7 +55,7 @@
                 <i class="ti ti-list-check fs-6"></i>
                 <p class="mb-0 fs-3">My Task</p>
                 </a>
-                <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                <a href="{{url('logout')}}" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
             </div>
             </div>
         </li>

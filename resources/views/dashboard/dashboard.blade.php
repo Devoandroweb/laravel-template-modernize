@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app',['title'=>'Dashboard'])
 @section('content')
 <!--  Row 1 -->
 <div class="row">

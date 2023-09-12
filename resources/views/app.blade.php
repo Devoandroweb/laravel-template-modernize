@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="en">
-@include('panels.head')
+@include('panels.head',['title'=>$title])
 <body style="background: #edeff1">
 <!--  Body Wrapper Start -->
 <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
 data-sidebar-position="fixed" data-header-position="fixed">
 <!-- Sidebar Start -->
-@include('panels.sidebar')
+{{-- @include('panels.sidebar') --}}
 <!--  Sidebar End -->
 <!--  Main wrapper -->
 <div class="body-wrapper ms-0">

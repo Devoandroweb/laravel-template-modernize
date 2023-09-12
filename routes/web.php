@@ -1,6 +1,8 @@
+
 <?php
 
 use App\Http\Controllers\CDashboard;
+use App\Http\Controllers\CLogin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard', CDashboard::class);
+Route::get('/', [CLogin::class,'index'])->middleware('guest');
+Route::post('/auth', [CLogin::class,'authenticated']);
+
+Route::middleware('auth')->group(function(){
+    Route::get('/dashboard', CDashboard::class);
+    Route::get('/logout', [CLogin::class,'logout']);
+});
