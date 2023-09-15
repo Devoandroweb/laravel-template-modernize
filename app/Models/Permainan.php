@@ -11,4 +11,7 @@ class Permainan extends Model
     protected $primaryKey = 'id_permainan';
     protected $table = 'permainan';
     protected $fillable = ['image','pertanyaan'];
+    function imageSrc(){
+        return url('images/permainan/'.$this->image);
+    }
 }

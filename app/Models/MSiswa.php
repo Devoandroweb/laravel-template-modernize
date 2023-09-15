@@ -10,5 +10,5 @@ class MSiswa extends Model
     use HasFactory;
     protected $primaryKey = 'id_siswa';
     protected $table = 'siswa';
-    protected $fillable = ['nis','nama','id_kelas'];
+    protected $fillable = ['nis','nama','kelas'];
 }

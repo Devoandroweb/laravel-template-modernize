@@ -59,11 +59,19 @@
   <script>
     $("#btn-login").click(function (e) {
         e.preventDefault();
-        $(this).addClass('disabled')
-        $(this).text('Tunggu sebentar ...')
+        login()
+    });
+    $(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        login()
+    }
+});
+    function login(){
+        $("#btn-login").addClass('disabled')
+        $("#btn-login").text('Tunggu sebentar ...')
         $(".card").addClass('box')
         $('form').submit()
-    });
+    }
   </script>
 </body>
 </html>

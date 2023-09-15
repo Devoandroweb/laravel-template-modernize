@@ -25,6 +25,11 @@ return new class extends Migration
             $table->id('id_latihan')->autoIncrement();;
             $table->string('pertanyaan');
             $table->string('bobot');
+            $table->string('pilihan_a');
+            $table->string('pilihan_b');
+            $table->string('pilihan_c');
+            $table->string('pilihan_d');
+            $table->string('jawaban');
             $table->timestamps();
         });
 
@@ -54,13 +59,13 @@ return new class extends Migration
             $table->id('id_siswa')->autoIncrement();;
             $table->string('nis');
             $table->string('nama');
-            $table->integer('id_kelas');
+            $table->string('kelas');
             $table->timestamps();
         });
 
         Schema::create('permainan', function (Blueprint $table) {
             $table->id('id_permainan')->autoIncrement();;
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('pertanyaan');
             $table->timestamps();
         });

@@ -18,13 +18,13 @@
                     Master
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">Materi</a></li>
-                    <li><a class="dropdown-item" href="#">Latihan</a></li>
-                    <li><a class="dropdown-item" href="#">Permainan</a></li>
+                    <li><a class="dropdown-item" href="{{route('master.materi.index')}}">Materi</a></li>
+                    <li><a class="dropdown-item" href="{{route('master.latihan.index')}}">Latihan</a></li>
+                    <li><a class="dropdown-item" href="{{route('master.permainan.index')}}">Permainan</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Siswa</a>
+                <a class="nav-link" href="{{route('siswa.index')}}">Siswa</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Nilai Siswa</a>

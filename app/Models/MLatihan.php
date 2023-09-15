@@ -10,5 +10,5 @@ class MLatihan extends Model
     use HasFactory;
     protected $primaryKey = 'id_latihan';
     protected $table = 'latihan';
-    protected $fillable = ['pertanyaan','bobot'];
+    protected $fillable = ['pertanyaan','bobot','pilihan_a','pilihan_b','pilihan_c','pilihan_d','jawaban'];
 }
