@@ -28,7 +28,7 @@ class CLogin extends Controller
         return back()->with('message','Nama atau Kelas salah');
     }
     function logout(Request $request){
-        Auth::logout();
+        Auth::guard('siswa')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/login-siswa');
