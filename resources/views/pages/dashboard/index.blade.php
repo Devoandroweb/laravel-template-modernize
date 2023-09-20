@@ -2,8 +2,18 @@
 @section('content')
 <!--  Row 1 -->
 <div class="row">
+    <div class="col text-center">
+        <div class="card border border-primary border-3">
+            <div class="card-body p-4">
+                <img src="{{asset('images/logos/logo-sd.png')}}" style="width: 150px" alt=""><br><br>
+                <h1 class="fw-semibold">Aplikasi Pembelajaran Pendidikan Agama Islam (APAI)</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-lg-8 d-flex align-items-strech">
-        <div class="card w-100">
+        <div class="card w-100 border border-secondary border-3">
             <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Terakhir Siswa yang Login</h5>
                 <div class="table-responsive">
@@ -55,7 +65,7 @@
         <div class="row">
         <div class="col-lg-12">
             <!-- Yearly Breakup -->
-            <div class="card overflow-hidden">
+            <div class="card border border-warning border-3 overflow-hidden">
             <div class="card-body p-4">
                 <h5 class="card-title mb-9 fw-semibold">Total Siswa</h5>
                 <div class="row align-items-center">
