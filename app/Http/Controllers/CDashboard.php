@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MSiswa;
 use Illuminate\Http\Request;
 
 class CDashboard extends Controller
@@ -14,6 +15,8 @@ class CDashboard extends Controller
      */
     public function __invoke(Request $request)
     {
-    return view('pages.dashboard.index');
+        $siswaL = MSiswa::whereJk('L')->get()->count();
+        $siswaP = MSiswa::whereJk('P')->get()->count();
+        return view('pages.dashboard.index',compact('siswaL','siswaP'));
     }
 }

@@ -29,7 +29,7 @@ Route::get('/', [SiswaCLogin::class,'index'])->middleware('guest')->name('siswa.
 Route::post('/auth-siswa', [SiswaCLogin::class,'authenticated'])->middleware('guest')->name('siswa.auth');
 
 Route::middleware('auth')->group(function(){
-    Route::get('/dashboard', CDashboard::class);
+    Route::get('/dashboard', CDashboard::class)->name('dashboard');
     Route::get('/logout', [CLogin::class,'logout']);
 
     Route::prefix('/master')

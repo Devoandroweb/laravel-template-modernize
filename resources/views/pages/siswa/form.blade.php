@@ -18,6 +18,7 @@
                             4 => "Kelas 4",
                             5 => "Kelas 5",
                             6 => "Kelas 6"];
+                        $jk = ['L'=>'Laki-laki','P'=>'Perempuan'];
                     @endphp
                     <input type="hidden" name="id_siswa" value="{{$mSiswa->id_siswa ?? null}}">
                     <div class="mb-3">
@@ -35,6 +36,10 @@
                             'placeholder'=>'Nama Lengkap',
                             'required' => 'required'
                         ])
+                    </div>
+                    <div class="mb-3">
+                        <label for="jk" class="form-label">Jenis Kelamin</label>
+                        @form_select('jk',$jk,$mSiswa->jk ?? 'Perempuan',['class' => 'form-control'])
                     </div>
                     <div class="mb-3">
                         <label for="kelas" class="form-label">Kelas</label>

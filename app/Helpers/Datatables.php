@@ -42,6 +42,7 @@ function siswaDT(){
             ['title' => 'No','data' => 'DT_RowIndex', 'orderable'=> false ,'searchable'=> false],
             ['title' => 'NIS','data' => 'nis','name' => 'nis'],
             ['title' => 'Nama','data' => 'nama','name' => 'nama'],
+            ['title' => 'Jenis Kelamin','data' => 'jk','name' => 'jk'],
             ['title' => 'Kelas','data' => 'kelas','name' => 'kelas'],
             ['title' => 'Action','data' => 'action','name' => null,'orderable'=> false ,'searchable'=> false],
         ]

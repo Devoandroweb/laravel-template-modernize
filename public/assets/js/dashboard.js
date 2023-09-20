@@ -109,10 +109,10 @@ $(function () {
   // =====================================
   // Breakup
   // =====================================
-  var breakup = {
+  var totalSiswa = {
     color: "#adb5bd",
-    series: [400, 900, 230],
-    labels: ["Masuk", "Keluar", "Return"],
+    series: [100, 100],
+    labels: ["Perempuan", "Laki-laki"],
     chart: {
       width: 180,
       type: "donut",
@@ -139,7 +139,7 @@ $(function () {
     legend: {
       show: false,
     },
-    colors: ["#13DEB9", "#FA896B", "#FFAE1F"],
+    colors: ["#13DEB9", "#FA896B"],
 
     responsive: [
       {
@@ -157,56 +157,6 @@ $(function () {
     },
   };
 
-  var chart = new ApexCharts(document.querySelector("#breakup"), breakup);
+  var chart = new ApexCharts(document.querySelector("#totalSiswa"), totalSiswa);
   chart.render();
-
-
-
-  // =====================================
-  // Earning
-  // =====================================
-  var earning = {
-    chart: {
-      id: "sparkline3",
-      type: "area",
-      height: 60,
-      sparkline: {
-        enabled: true,
-      },
-      group: "sparklines",
-      fontFamily: "Plus Jakarta Sans', sans-serif",
-      foreColor: "#adb0bb",
-    },
-    series: [
-      {
-        name: "Pendapatan (%)",
-        color: "#49BEFF",
-        data: [5, 10, 20, 15, 5, 10, 5, 10, 5, 5, 15, 5],
-      },
-    ],
-    stroke: {
-      curve: "smooth",
-      width: 2,
-    },
-    fill: {
-      colors: ["#f3feff"],
-      type: "solid",
-      opacity: 0.05,
-    },
-
-    markers: {
-      size: 0,
-    },
-    tooltip: {
-      theme: "dark",
-      fixed: {
-        enabled: true,
-        position: "right",
-      },
-      x: {
-        show: false,
-      },
-    },
-  };
-  new ApexCharts(document.querySelector("#earning"), earning).render();
 })

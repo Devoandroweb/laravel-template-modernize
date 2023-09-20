@@ -79,6 +79,15 @@ class CDatatable extends Controller
         ->editColumn('kelas',function($row){
             return "Kelas ".$row->kelas;
         })
+        ->editColumn('jk',function($row){
+            if($row->jk == 'L'){
+                return 'Laki-laki';
+            }elseif($row->jk == 'P'){
+                return 'Perempuan';
+            }else{
+                return "-";
+            }
+        })
         ->addColumn('action',function($row){
             return '
             <form action="'.route('siswa.destroy',$row).'" method="POST">

@@ -47,6 +47,7 @@ class CSiswa extends Controller
             'nis'=>$request->nis,
             'nama'=>$request->nama,
             'kelas'=>$request->kelas,
+            'jk'=>$request->jk,
         ]);
         if($request->id_siswa){
             return to_route('siswa.index')->with('message','Sukses Mengubah Siswa');

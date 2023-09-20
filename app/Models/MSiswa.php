@@ -13,5 +13,5 @@ class MSiswa extends  Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     protected $primaryKey = 'id_siswa';
     protected $table = 'siswa';
-    protected $fillable = ['nis','nama','kelas'];
+    protected $fillable = ['nis','nama','kelas','jk'];
 }

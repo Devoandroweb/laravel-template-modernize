@@ -32,4 +32,13 @@
         </div>
     </div>
 </div>
+@push('js')
+<script>
+    ClassicEditor
+		.create( document.querySelector( '#editor' ) )
+		.catch( error => {
+			console.error( error );
+		} );
+</script>
+@endpush
 @endsection
