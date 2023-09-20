@@ -18,4 +18,16 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+</IfModule>
+# ----------------------------------------------------------------------
+# | Cross-origin web fonts                                             |
+# ----------------------------------------------------------------------
+
+# Allow cross-origin access to web fonts.
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(ttf|eot|otf|tt[cf]|woff2?)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
 </IfModule>

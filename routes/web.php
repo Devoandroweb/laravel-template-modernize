@@ -9,6 +9,7 @@ use App\Http\Controllers\Master\CKelas;
 use App\Http\Controllers\Master\CLatihan;
 use App\Http\Controllers\Master\CMateri;
 use App\Http\Controllers\Master\CPermainan;
+use App\Http\Controllers\Siswa\CLogin as SiswaCLogin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [CLogin::class,'index'])->middleware('guest')->name('login');
 Route::post('/auth', [CLogin::class,'authenticated']);
+Route::get('/', [SiswaCLogin::class,'index'])->middleware('guest')->name('siswa.login');
+Route::post('/auth-siswa', [SiswaCLogin::class,'authenticated'])->middleware('guest')->name('siswa.auth');
 
 Route::middleware('auth')->group(function(){
     Route::get('/dashboard', CDashboard::class);

@@ -1,0 +1,97 @@
+:root {
+    --color-purple: #A583C859;
+    --color-pink: #FAD2D3;
+    --color-green: #B6FCAB59;
+    --color-red: red;
+    --color-blue-light: #ACD0FB59;
+  }
+@import url('https://fonts.googleapis.com/css2?family=Potta+One&display=swap');
+body{
+    font-family: 'Potta One', cursive;
+}
+p{
+    padding: 0;
+    margin: 0;
+}
+.bg-main{
+    background: #FEF5F0F5;
+}
+.bg-border-dashed{
+    border-style: dashed;
+    border-radius: 28px;
+}
+.wall-purple{
+    background: var(--color-purple);
+    border-radius: 15px;
+    border-style: none;
+}
+.border-dashed-purple{
+    padding: 5px;
+    border-style: dashed;
+    border-radius: 15px;
+    border-width: 3px;
+    border-color: var(--color-purple);
+}
+.wall-pink{
+    background: var(--color-pink);
+    border-radius: 15px;
+    border-style: none;
+}
+.border-dashed-pink{
+    padding: 5px;
+    border-style: dashed;
+    border-radius: 15px;
+    border-width: 3px;
+    border-color: var(--color-pink);
+}
+.wall-green{
+    background: var(--color-green);
+    border-radius: 15px;
+    border-style: none;
+}
+.border-dashed-green{
+    padding: 5px;
+    border-style: dashed;
+    border-radius: 15px;
+    border-width: 3px;
+    border-color: var(--color-green);
+}
+.wall-blue-light{
+    background: var(--color-blue-light);
+    border-radius: 15px;
+    border-style: none;
+}
+.border-dashed-blue-light{
+    padding: 5px;
+    border-style: dashed;
+    border-radius: 15px;
+    border-width: 3px;
+    border-color: var(--color-blue-light);
+
+}
+.border-dashed-active{
+    border-color: var(--color-red);
+}
+
+.btn-blue{
+    background-color: #347AB2;
+    border-radius: 15px;
+    color: white;
+}
+.bg-blue-light{
+    background-color: #ACD0FB59;
+    border-radius: 20px;
+    padding: 5px;
+    color: #042987;
+    font-size: 25px;
+}
+
+
+
+
+
+
+
+input:focus{
+    outline: none;
+}
