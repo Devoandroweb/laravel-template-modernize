@@ -9,7 +9,10 @@ use App\Http\Controllers\Master\CKelas;
 use App\Http\Controllers\Master\CLatihan;
 use App\Http\Controllers\Master\CMateri;
 use App\Http\Controllers\Master\CPermainan;
+use App\Http\Controllers\Siswa\CHome;
 use App\Http\Controllers\Siswa\CLogin as SiswaCLogin;
+use App\Http\Controllers\Siswa\CMateri as SiswaMateri;
+use App\Http\Controllers\Siswa\CLatihan as SiswaLatihan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,9 +26,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', [CLogin::class,'index'])->middleware('guest')->name('login');
+Route::get('/admin', [CLogin::class,'index'])->middleware('guest')->name('admin');
 Route::post('/auth', [CLogin::class,'authenticated']);
-Route::get('/', [SiswaCLogin::class,'index'])->middleware('guest')->name('siswa.login');
+Route::get('/', [SiswaCLogin::class,'index'])->middleware('guest:siswa')->name('siswa.login');
 Route::post('/auth-siswa', [SiswaCLogin::class,'authenticated'])->middleware('guest')->name('siswa.auth');
 
 Route::middleware('auth')->group(function(){
@@ -37,6 +40,7 @@ Route::middleware('auth')->group(function(){
     ->group(function(){
         Route::resource('/materi',CMateri::class,['parameters' => ['materi' => 'mMateri']]);
         Route::resource('/latihan',CLatihan::class,['parameters' => ['latihan' => 'mLatihan']]);
+        Route::get('/latihan-detail/{nomor}',[CLatihan::class,'detail'])->name('latihan.detail');
         Route::resource('/permainan',CPermainan::class);
     });
 
@@ -48,7 +52,21 @@ Route::middleware('auth')->group(function(){
     ->group(function(){
         Route::get('/materi',[CDatatable::class,'materi'])->name('materi');
         Route::get('/latihan',[CDatatable::class,'latihan'])->name('latihan');
+        Route::get('/latihan-detail',[CDatatable::class,'latihanDetail'])->name('latihan.detail');
         Route::get('/permainan',[CDatatable::class,'permainan'])->name('permainan');
         Route::get('/siswa',[CDatatable::class,'siswa'])->name('siswa');
     });
+});
+
+Route::middleware('auth:siswa')->group(function(){
+    Route::prefix('/client')
+        ->name('client.')
+        ->group(function(){
+            Route::get('/logout',[SiswaCLogin::class,'logout'])->name('logout');
+            Route::get('/home',CHome::class)->name('home');
+            Route::get('/materi',[SiswaMateri::class,'index'])->name('materi');
+            Route::get('/latihan',[SiswaLatihan::class,'index'])->name('latihan');
+            Route::get('/latihan/detail/{nomor}',[SiswaLatihan::class,'detail'])->name('latihan.detail');
+            Route::get('/materi-detail/{mmateri}',[SiswaMateri::class,'show'])->name('materi.detail');
+        });
 });

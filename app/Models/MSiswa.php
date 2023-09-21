@@ -14,4 +14,7 @@ class MSiswa extends  Authenticatable
     protected $primaryKey = 'id_siswa';
     protected $table = 'siswa';
     protected $fillable = ['nis','nama','kelas','jk'];
+    function nilaiLatihan(){
+        return $this->hasMany(NilaiLatihan::class,'nis','nis');
+    }
 }

@@ -42,13 +42,13 @@ class CLatihan extends Controller
     public function store(Request $request, MLatihan $mLatihan)
     {
 
-        $mLatihan->updateOrCreate([
+        $data = $mLatihan->updateOrCreate([
             'id_latihan'=>$request->id_latihan
         ],$request->except('_token','_method'));
         if($request->id_latihan){
-            return to_route('master.latihan.index')->with('message','Sukses Mengubah Latihan');
+            return to_route('master.latihan.detail',$data->nomor)->with('message','Sukses Mengubah Latihan');
         }else{
-            return to_route('master.latihan.index')->with('message','Sukses Menambahkan Latihan');
+            return to_route('master.latihan.detail',$data->nomor)->with('message','Sukses Menambahkan Latihan');
 
         }
     }
@@ -65,6 +65,13 @@ class CLatihan extends Controller
         $titleContent = 'Edit Latihan';
         return view('pages.master.latihan.form',compact('mLatihan','titleContent'));
     }
+    public function detail($nomor)
+    {
+        $titleContent = 'Detail Latihan';
+        $urlDT = latihanDetailDT()['url']."?nomor=".$nomor;
+        $columnDT = latihanDetailDT()['column'];
+        return view('pages.master.latihan.detail',compact('urlDT','columnDT','titleContent','nomor'));
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -74,6 +81,6 @@ class CLatihan extends Controller
     public function destroy(MLatihan $mLatihan)
     {
         $mLatihan->delete();
-        return to_route('master.latihan.index')->with('message','Sukses Menhapus Latihan');
+        return to_route('master.latihan.detail',$mLatihan->nomor)->with('message','Sukses Menhapus Latihan');
     }
 }

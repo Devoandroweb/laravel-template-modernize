@@ -19,10 +19,15 @@ class CLogin extends Controller
             'kelas' => ['required'],
         ]);
         // dd($credentials);
-        if (MSiswa::where($credentials)->first()) {
+        $siswa = MSiswa::where($credentials)->first();
+        // dd($siswa);
+        if ($siswa) {
             $request->session()->regenerate();
 
-            return redirect()->intended('siswa.home');
+            if(Auth::guard('siswa')->loginUsingId($siswa->id_siswa)){
+
+                return redirect()->intended(route('client.home'));
+            }
         }
 
         return back()->with('message','Nama atau Kelas salah');
@@ -31,6 +36,6 @@ class CLogin extends Controller
         Auth::guard('siswa')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login-siswa');
+        return to_route('login.siswa');
     }
 }

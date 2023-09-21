@@ -17,6 +17,18 @@ function latihanDT(){
         "url" => route("datatable.latihan"),
         "column" => [
             ['title' => 'No','data' => 'DT_RowIndex', 'orderable'=> false ,'searchable'=> false],
+            ['title' => 'Nomor Latihan','data' => 'nomor','name' => 'nomor'],
+            ['title' => 'Action','data' => 'action','name' => null,'orderable'=> false ,'searchable'=> false],
+        ]
+    ];
+    return $arrayColumns;
+}
+function latihanDetailDT(){
+    $arrayColumns = [
+        "url" => route("datatable.latihan.detail"),
+        "column" => [
+            ['title' => 'No','data' => 'DT_RowIndex', 'orderable'=> false ,'searchable'=> false],
+            ['title' => 'Urutan','data' => 'urutan','name' => 'urutan'],
             ['title' => 'Pertanyaan','data' => 'pertanyaan','name' => 'pertanyaan'],
             ['title' => 'Action','data' => 'action','name' => null,'orderable'=> false ,'searchable'=> false],
         ]

@@ -16,6 +16,22 @@
                     @csrf
                     <input type="hidden" name="id_latihan" value="{{$mLatihan->id_latihan ?? null}}">
                     <div class="mb-3">
+                        <label for="nomor" class="form-label">Nomor Latihan</label>
+                        @form_number('nomor',$mLatihan->nomor ?? '',[
+                            'class'=>'form-control',
+                            'placeholder'=>'Nomor Latihan',
+                            'required' => 'required'
+                        ])
+                    </div>
+                    <div class="mb-3">
+                        <label for="urutan" class="form-label">Urutan</label>
+                        @form_number('urutan',$mLatihan->urutan ?? '',[
+                            'class'=>'form-control',
+                            'placeholder'=>'Urutan',
+                            'required' => 'required'
+                        ])
+                    </div>
+                    <div class="mb-3">
                         <label for="pertanyaan" class="form-label">Pertanyaan</label>
                         <input type="text" class="form-control" id="pertanyaan" name="pertanyaan" value="{{$mLatihan->pertanyaan ?? ''}}" required>
                     </div>

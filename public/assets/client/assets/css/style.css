@@ -9,6 +9,10 @@
 body{
     font-family: 'Potta One', cursive;
 }
+a,a:hover{
+    text-decoration: none;
+    color: #323232;
+}
 p{
     padding: 0;
     margin: 0;

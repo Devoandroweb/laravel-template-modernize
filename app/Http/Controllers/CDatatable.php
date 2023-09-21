@@ -32,7 +32,23 @@ class CDatatable extends Controller
         ->toJson();
     }
     function latihan(DataTables $dataTables){
-        $mLatihan = MLatihan::all();
+        $mLatihan = MLatihan::groupBy('nomor')->get('nomor');
+        $mLatihan = collect($mLatihan->toArray());
+
+        return $dataTables->of($mLatihan)
+        ->editColumn('nomor',function($row){
+            return 'Latihan '.$row['nomor'];
+        })
+        ->addColumn('action',function($row){
+            return '<a href="'.route('master.latihan.detail',['nomor'=>$row['nomor']]).'" class="btn btn-small btn-info">Lihat</a>';
+        })
+        ->rawColumns(['action'])
+        ->addIndexColumn()
+        ->toJson();
+    }
+    function latihanDetail(DataTables $dataTables){
+        $nomor = request()->query('nomor');
+        $mLatihan = MLatihan::whereNomor($nomor)->orderBy('urutan','asc')->get();
         return $dataTables->of($mLatihan)
         ->addColumn('action',function($row){
             return '

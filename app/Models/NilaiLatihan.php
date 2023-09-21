@@ -10,5 +10,8 @@ class NilaiLatihan extends Model
     use HasFactory;
     protected $primaryKey = 'id_nilai_latihan';
     protected $table = 'nilai_latihan';
-    protected $fillable = ['nis','id_latihan','nilai'];
+    protected $fillable = ['nis','nomor','urutan','nilai'];
+     function latihan(){
+        return $this->hasMany(MLatihan::class,'nomor','nomor');
+     }
 }

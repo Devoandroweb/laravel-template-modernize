@@ -16,7 +16,7 @@
                     <input type="text" name="nama" placeholder="Ketik Nama anda disini" class="wall-purple p-2 text-center w-100" id="">
                 </div>
                 <div class="border-dashed-pink mb-2">
-                    <input type="text" name="kelas" placeholder="Kelas" class="wall-pink p-2 text-center w-100" id="">
+                    <input type="number" name="kelas" placeholder="Kelas" class="wall-pink p-2 text-center w-100" id="">
                 </div>
                 <button type="submit" class="btn-blue w-100 p-2 border-0">Masuk</button>
             </form>

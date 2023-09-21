@@ -6,6 +6,8 @@ use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 class RedirectIfAuthenticated
 {
@@ -19,11 +21,17 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        $guards = empty($guards) ? [null] : $guards;
+        
 
+        $guards = empty($guards) ? [null] : $guards;
+        // dd($guards);
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                if($guard == 'siswa'){
+                    return redirect(RouteServiceProvider::HOMECLIENT);
+                }else{
+                    return redirect(RouteServiceProvider::HOME);
+                }
             }
         }
 
