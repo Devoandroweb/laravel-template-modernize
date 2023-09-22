@@ -7,7 +7,7 @@
 {{-- <script src="{{asset('js/dashboard.js')}}"></script> --}}
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="{{asset('js/datatables.js')}}"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 
 @stack('datatable')
 @stack('js')

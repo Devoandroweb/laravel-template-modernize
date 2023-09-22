@@ -39,6 +39,12 @@
                         <label class="form-label">Pilihan</label>
                         @php
                             $pilihan = ['A','B','C','D'];
+                            $kunciJawaban = [
+                                'a'=>'A',
+                                'b'=>'B',
+                                'c'=>'C',
+                                'd'=>'D'
+                            ];
                         @endphp
                         @foreach ($pilihan as $pil)
                         <div class="input-group mb-3">
@@ -54,7 +60,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="jawaban" class="form-label">Kunci Jawaban</label>
-                        @form_select('jawaban',$pilihan,$mLatihan->jawaban ?? 'A',['class' => 'form-control'])
+                        @form_select('jawaban',$kunciJawaban,$mLatihan->jawaban ?? 'A',['class' => 'form-control'])
                     </div>
                     <div class="mb-3">
                         <label for="bobot" class="form-label">Bobot</label>

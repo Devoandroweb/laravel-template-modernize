@@ -67,6 +67,8 @@ Route::middleware('auth:siswa')->group(function(){
             Route::get('/materi',[SiswaMateri::class,'index'])->name('materi');
             Route::get('/latihan',[SiswaLatihan::class,'index'])->name('latihan');
             Route::get('/latihan/detail/{nomor}',[SiswaLatihan::class,'detail'])->name('latihan.detail');
+            Route::get('/latihan/next/{nomor}',[SiswaLatihan::class,'next'])->name('latihan.next');
+            Route::get('/latihan/thankyu',[SiswaLatihan::class,'thankyu'])->name('latihan.thankyu');
             Route::get('/materi-detail/{mmateri}',[SiswaMateri::class,'show'])->name('materi.detail');
         });
 });

@@ -73,6 +73,19 @@ p{
     border-color: var(--color-blue-light);
 
 }
+.wall-green{
+    background: var(--color-green);
+    border-radius: 15px;
+    border-style: none;
+}
+.border-dashed-green{
+    padding: 5px;
+    border-style: dashed;
+    border-radius: 15px;
+    border-width: 3px;
+    border-color: var(--color-green);
+
+}
 .border-dashed-active{
     border-color: var(--color-red);
 }

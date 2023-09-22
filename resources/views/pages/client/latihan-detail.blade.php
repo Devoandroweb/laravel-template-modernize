@@ -25,22 +25,22 @@
                 </div>
             </div>
 
-            <div class="border-dashed-purple mb-2 pilihan">
+            <div class="border-dashed-purple mb-2 pilihan" data-pilihan="a">
                 <div class="wall-purple p-3">
                     <p>A. {{$latihan->pilihan_a}}</p>
                 </div>
             </div>
-            <div class="border-dashed-purple mb-2 pilihan">
+            <div class="border-dashed-purple mb-2 pilihan" data-pilihan="b">
                 <div class="wall-purple p-3">
                     <p>B. {{$latihan->pilihan_b}}</p>
                 </div>
             </div>
-            <div class="border-dashed-purple mb-2 pilihan">
+            <div class="border-dashed-purple mb-2 pilihan" data-pilihan="c">
                 <div class="wall-purple p-3">
                     <p>C. {{$latihan->pilihan_c}}</p>
                 </div>
             </div>
-            <div class="border-dashed-purple mb-2 pilihan">
+            <div class="border-dashed-purple mb-2 pilihan" data-pilihan="d">
                 <div class="wall-purple p-3">
                     <p>D. {{$latihan->pilihan_d}}</p>
                 </div>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="col text-end">
                     @if($nextButton)
-                    <a href="{{route('client.latihan.detail',$latihan->nomor)}}?urutan={{$latihan->urutan+1}}">
+                    <a href="#" class="btn-lanjut">
                         <div class="border-dashed-blue-light mb-2 btn-next btn disabled">
                             <div class="wall-blue-light p-2 px-4 text-center">
                                 <p>Lanjut</p>
@@ -67,11 +67,13 @@
                         </div>
                     </a>
                     @else
-                    <div class="border-dashed-blue-light mb-2 btn">
+                    <a href="#" class="btn-lanjut">
+                    <div class="border-dashed-blue-light mb-2 btn btn-next disabled">
                         <div class="wall-blue-light p-2 px-4 text-center">
                             <p>Selesai</p>
                         </div>
                     </div>
+                    </a>
                     @endif
                 </div>
             </div>
@@ -80,11 +82,22 @@
     </div>
     @include('pages.client.panels.js')
     <script>
+        var selesai = false;
+        @if($nextButton)
+            selesai = true;
+        @endif
+        
         $(".pilihan").click(function (e) {
             e.preventDefault();
             $(".pilihan").removeClass('border-dashed-active')
             $(this).addClass('border-dashed-active')
             $('.btn-next').removeClass('disabled')
+        });
+        $(".pilihan").click(function (e) {
+            e.preventDefault();
+            var pilihan = $(this).data('pilihan');
+            var href = "{{route('client.latihan.next',$latihan->nomor)}}?urutan={{$latihan->urutan+1}}&nis={{$nis}}&selesai="+selesai;
+            $('.btn-lanjut').attr('href',href+"&jawaban="+pilihan);
         });
     </script>
 </body>
