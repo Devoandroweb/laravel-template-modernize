@@ -61,7 +61,8 @@ class CLatihan extends Controller
                 'nilai'=>$nilai
             ]);
         }
-        if($selesai){
+        // dd($selesai);
+        if($selesai == 'true'){
             return to_route('client.latihan.thankyu');
         }
         return to_route('client.latihan.detail',$nomor);

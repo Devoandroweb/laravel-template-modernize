@@ -23,7 +23,7 @@ class CLogin extends Controller
         // dd($siswa);
         if ($siswa) {
             $request->session()->regenerate();
-
+            // dd(Auth::guard('siswa')->loginUsingId($siswa->id_siswa));
             if(Auth::guard('siswa')->loginUsingId($siswa->id_siswa)){
 
                 return redirect()->intended(route('client.home'));
@@ -36,6 +36,6 @@ class CLogin extends Controller
         Auth::guard('siswa')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return to_route('login.siswa');
+        return to_route('siswa.login');
     }
 }

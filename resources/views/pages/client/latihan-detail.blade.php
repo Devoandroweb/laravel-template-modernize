@@ -82,11 +82,11 @@
     </div>
     @include('pages.client.panels.js')
     <script>
-        var selesai = false;
+        var selesai = true;
         @if($nextButton)
-            selesai = true;
+            selesai = false;
         @endif
-        
+
         $(".pilihan").click(function (e) {
             e.preventDefault();
             $(".pilihan").removeClass('border-dashed-active')

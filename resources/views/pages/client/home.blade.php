@@ -2,8 +2,18 @@
 <html lang="en">
 @include('pages.client.panels.head',['title'=>'login'])
 <body class="bg-main">
+    <div class="row">
+        <div class="col px-4 py-4">
+            <a href="{{route('client.logout')}}">
+                <div class="btn-back text-danger text-end">
+                    <i class="fas fa-sign-out-alt me-2"></i> Keluar
+                </div>
+            </a>
+        </div>
+    </div>
     <div class="row justify-content-center m-auto">
         <div class="col p-4 text-center">
+
             <img src="{{asset('client/assets/home.png')}}" width="200px" alt=""><br><br>
             <div class="bg-blue-light mb-4 mx-1">Semester 1</div>
             <div class="row">
