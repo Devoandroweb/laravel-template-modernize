@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function(){
     ->group(function(){
         Route::get('/','index')->name('index');
         Route::get('/detail/{nomor}','detail')->name('detail');
+        Route::get('/reset/{nomor}','reset')->name('reset');
     });
 
     Route::resource('/siswa',CSiswa::class,['parameters' => ['siswa' => 'mSiswa']]);
