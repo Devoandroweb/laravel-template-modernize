@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-@include('pages.client.panels.head',['title'=>'login'])
+@extends('pages.client.app',['title'=>'Home'])
+@section('content')
 <body class="bg-main p-4">
     <div class="row col">
         <a href="{{route('client.home')}}">
@@ -34,5 +33,4 @@
         @endforeach
     </div>
     @include('pages.client.panels.js')
-</body>
-</html>
+@endsection

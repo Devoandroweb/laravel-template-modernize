@@ -61,4 +61,28 @@ function siswaDT(){
     ];
     return $arrayColumns;
 }
+function nilaiLatihanDT(){
+    $arrayColumns = [
+        "url" => route("datatable.nilai_latihan"),
+        "column" => [
+            ['title' => 'No','data' => 'DT_RowIndex', 'orderable'=> false ,'searchable'=> false],
+            ['title' => 'Nomor Latihan','data' => 'nomor','name' => 'nomor'],
+            ['title' => 'Action','data' => 'action','name' => null,'orderable'=> false ,'searchable'=> false],
+        ]
+    ];
+    return $arrayColumns;
+}
+function nilaiLatihanDetailDT(){
+    $arrayColumns = [
+        "url" => route("datatable.nilai_latihan.detail"),
+        "column" => [
+            ['title' => 'No','data' => 'DT_RowIndex', 'orderable'=> false ,'searchable'=> false],
+            ['title' => 'NIS','data' => 'nis','name' => 'nis'],
+            ['title' => 'Nama','data' => 'nama','name' => 'nama'],
+            ['title' => 'Nilai','data' => 'nilai','name' => 'nilai','orderable'=> true],
+            // ['title' => 'Action','data' => 'action','name' => null,'orderable'=> false ,'searchable'=> false],
+        ]
+    ];
+    return $arrayColumns;
+}
 

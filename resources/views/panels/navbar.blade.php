@@ -27,7 +27,7 @@
                 <a class="nav-link" href="{{route('siswa.index')}}">Siswa</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Nilai Siswa</a>
+                <a class="nav-link" href="{{route('nilai_latihan.index')}}">Nilai Siswa</a>
             </li>
         </ul>
         </div>

@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-@include('pages.client.panels.head',['title'=>'login'])
-<style>
-    .pilihan{
-        cursor: pointer;
-    }
-</style>
-<body class="bg-main p-4">
+@extends('pages.client.app',['title'=>'Latihan Yuk'])
+@section('content')
+    <style>
+        .pilihan{
+            cursor: pointer;
+        }
+    </style>
     <div class="row col">
         <a href="{{route('client.latihan')}}">
         <div class="btn-back text-muted">
@@ -100,5 +98,4 @@
             $('.btn-lanjut').attr('href',href+"&jawaban="+pilihan);
         });
     </script>
-</body>
-</html>
+@endsection

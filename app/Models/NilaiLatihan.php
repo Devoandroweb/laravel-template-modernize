@@ -14,4 +14,7 @@ class NilaiLatihan extends Model
      function latihan(){
         return $this->hasMany(MLatihan::class,'nomor','nomor');
      }
+     function siswa(){
+        return $this->hasOne(MSiswa::class,'nis','nis');
+     }
 }

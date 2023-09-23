@@ -1,7 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-@include('pages.client.panels.head',['title'=>'login'])
-<body class="bg-main p-4">
+@extends('pages.client.app',['title'=>'Materi Detail'])
+@section('content')
     <div class="row col">
         <a href="{{route('client.materi')}}">
             <div class="btn-back text-muted">
@@ -22,5 +20,4 @@
         </div>
     </div>
     @include('pages.client.panels.js')
-</body>
-</html>
+@endsection

@@ -4,6 +4,7 @@
 use App\Http\Controllers\CDashboard;
 use App\Http\Controllers\CDatatable;
 use App\Http\Controllers\CLogin;
+use App\Http\Controllers\CNilaiLatihan;
 use App\Http\Controllers\CSiswa;
 use App\Http\Controllers\Master\CKelas;
 use App\Http\Controllers\Master\CLatihan;
@@ -44,6 +45,14 @@ Route::middleware('auth')->group(function(){
         Route::resource('/permainan',CPermainan::class);
     });
 
+    Route::prefix('/nilai_latihan')
+    ->name('nilai_latihan.')
+    ->controller(CNilaiLatihan::class)
+    ->group(function(){
+        Route::get('/','index')->name('index');
+        Route::get('/detail/{nomor}','detail')->name('detail');
+    });
+
     Route::resource('/siswa',CSiswa::class,['parameters' => ['siswa' => 'mSiswa']]);
 
 
@@ -55,6 +64,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/latihan-detail',[CDatatable::class,'latihanDetail'])->name('latihan.detail');
         Route::get('/permainan',[CDatatable::class,'permainan'])->name('permainan');
         Route::get('/siswa',[CDatatable::class,'siswa'])->name('siswa');
+        Route::get('/nilai-latihan',[CDatatable::class,'nilaiLatihan'])->name('nilai_latihan');
+        Route::get('/nilai-latihan/detail',[CDatatable::class,'nilaiLatihanDetail'])->name('nilai_latihan.detail');
     });
 });
 

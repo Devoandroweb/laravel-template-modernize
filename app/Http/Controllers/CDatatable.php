@@ -6,8 +6,10 @@ use App\Models\MKelas;
 use App\Models\MLatihan;
 use App\Models\MMateri;
 use App\Models\MSiswa;
+use App\Models\NilaiLatihan;
 use App\Models\Permainan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
 class CDatatable extends Controller
@@ -120,6 +122,50 @@ class CDatatable extends Controller
         ->addIndexColumn()
         ->toJson();
     }
+    function nilaiLatihan(DataTables $dataTables){
+        $mLatihan = MLatihan::groupBy('nomor')->get('nomor');
+        $mLatihan = collect($mLatihan->toArray());
+
+        return $dataTables->of($mLatihan)
+        ->editColumn('nomor',function($row){
+            return 'Latihan '.$row['nomor'];
+        })
+        ->addColumn('action',function($row){
+            return '<a href="'.route('nilai_latihan.detail',['nomor'=>$row['nomor']]).'" class="btn btn-small btn-info">Lihat</a>';
+        })
+        ->rawColumns(['action'])
+        ->addIndexColumn()
+        ->toJson();
+    }
+    function nilaiLatihanDetail(DataTables $dataTables){
+        $nomor = request()->query('nomor');
+        // dd($nomor);
+        $defaultOrderDirection = 'desc';
+
+        $dataTables = DataTables::of(MSiswa::whereHas('nilaiLatihan', function ($q) use ($nomor) {
+            $q->whereNomor($nomor);
+        }))
+        ->addColumn('nilai', function ($row) use ($nomor) {
+            return '<span class="badge text-bg-info fw-bold">' . $row->nilaiLatihan->where('nis',$row->nis)->where('nomor',$nomor)->sum('nilai') . '</span>';
+        })
+        ->rawColumns(['nilai'])
+        ->addIndexColumn();
+
+        // Mendefinisikan pengurutan untuk kolom "nilai"
+        $dataTables->orderColumn('nilai', function ($query) use ($defaultOrderDirection) {
+            $query->orderBy(function ($query) {
+                $query->select(DB::raw('SUM(nilai)'))
+                    ->from('nilai_latihan')
+                    ->whereColumn('nis', 'siswa.nis');
+            },$defaultOrderDirection);
+        });
+        // $dataTables->order([[3, $defaultOrderDirection]]);
+
+        return $dataTables->toJson();
+
+    }
+
 
 }
+
 
