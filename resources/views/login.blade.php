@@ -39,7 +39,7 @@
                   </div>
                   <div class="d-flex align-items-center justify-content-between mb-4">
                     <div class="form-check">
-                      <input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked>
+                      <input class="form-check-input primary" type="checkbox" name="remember" value="1" id="flexCheckChecked" checked>
                       <label class="form-check-label text-dark" for="flexCheckChecked">
                         Ingatkan saya
                       </label>

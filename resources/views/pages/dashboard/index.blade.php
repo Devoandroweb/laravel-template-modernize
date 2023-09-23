@@ -38,23 +38,25 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach ($siswaTerkahirLogin as $st)
                     <tr>
-                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">1</h6></td>
+                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">{{$loop->iteration}}</h6></td>
                         <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">123</h6>
+                            <h6 class="fw-semibold mb-1">{{$st->nis}}</h6>
                         </td>
                         <td class="border-bottom-0">
-                        <p class="mb-0 fw-normal">Susil Joni</p>
+                        <p class="mb-0 fw-normal">{{$st->nama}}</p>
                         </td>
                         <td class="border-bottom-0">
-                        <div class="d-flex align-items-center gap-2">
-                            <p class="mb-0 fw-normal">Kelas 1</p>
-                        </div>
-                    </td>
-                    <td class="border-bottom-0">
-                            <span class="badge bg-primary rounded-3">02-09-2023 | 14:34:21</span>
+                            <div class="d-flex align-items-center gap-2">
+                                <p class="mb-0 fw-normal">Kelas {{$st->kelas}}</p>
+                            </div>
+                        </td>
+                        <td class="border-bottom-0">
+                            <span class="badge bg-primary rounded-3">{{date('d-m-Y | H:i:s',strtotime($st->terakhir_login))}}</span>
                         </td>
                     </tr>
+                    @endforeach
                     </tbody>
                 </table>
                 </div>

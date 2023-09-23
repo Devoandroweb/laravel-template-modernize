@@ -13,7 +13,7 @@ class MSiswa extends  Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     protected $primaryKey = 'id_siswa';
     protected $table = 'siswa';
-    protected $fillable = ['nis','nama','kelas','jk'];
+    protected $fillable = ['nis','nama','kelas','jk','terakhir_login'];
     function nilaiLatihan(){
         return $this->hasMany(NilaiLatihan::class,'nis','nis');
     }

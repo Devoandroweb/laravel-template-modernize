@@ -12,22 +12,24 @@ class CLogin extends Controller
     }
     function authenticated(Request $request){
         $credentials = $request->validate([
-                'email' => ['required', 'email'],
-                'password' => ['required'],
-            ]);
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+        $remember = request('remember');
+        if($remember){
+            $remember = true;
+        }
+        if (Auth::attempt($credentials,$remember)) {
+            $request->session()->regenerate();
 
-            if (Auth::attempt($credentials)) {
-                $request->session()->regenerate();
-
-                return redirect()->intended('dashboard');
-            }
-
-            return back()->with('message','Email atau Password salah');
+            return redirect()->intended('dashboard');
+        }
+        return back()->with('message','Email atau Password salah');
     }
     function logout(Request $request){
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/admin');
     }
 }

@@ -25,7 +25,8 @@ class CLogin extends Controller
             $request->session()->regenerate();
             // dd(Auth::guard('siswa')->loginUsingId($siswa->id_siswa));
             if(Auth::guard('siswa')->loginUsingId($siswa->id_siswa)){
-
+                $siswa->terakhir_login = date("Y-m-d H:i:s");
+                $siswa->update();
                 return redirect()->intended(route('client.home'));
             }
         }
@@ -33,6 +34,10 @@ class CLogin extends Controller
         return back()->with('message','Nama atau Kelas salah');
     }
     function logout(Request $request){
+        $user = Auth::guard('siswa')->user();
+        $siswa = MSiswa::find($user->id_siswa);
+        $siswa->terakhir_login = date("Y-m-d H:i:s");
+        $siswa->update();
         Auth::guard('siswa')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

@@ -17,6 +17,7 @@ class CDashboard extends Controller
     {
         $siswaL = MSiswa::whereJk('L')->get()->count();
         $siswaP = MSiswa::whereJk('P')->get()->count();
-        return view('pages.dashboard.index',compact('siswaL','siswaP'));
+        $siswaTerkahirLogin = MSiswa::whereNotNull('terakhir_login')->orderBy('terakhir_login','desc')->limit(5)->get();
+        return view('pages.dashboard.index',compact('siswaL','siswaP','siswaTerkahirLogin'));
     }
 }
