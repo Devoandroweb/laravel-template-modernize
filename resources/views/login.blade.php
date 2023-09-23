@@ -62,10 +62,10 @@
         login()
     });
     $(document).on('keypress',function(e) {
-    if(e.which == 13) {
-        login()
-    }
-});
+        if(e.which == 13) {
+            login()
+        }
+    });
     function login(){
         $("#btn-login").addClass('disabled')
         $("#btn-login").text('Tunggu sebentar ...')

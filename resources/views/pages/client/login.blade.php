@@ -18,10 +18,22 @@
                 <div class="border-dashed-pink mb-2">
                     <input type="number" name="kelas" placeholder="Kelas" class="wall-pink p-2 text-center w-100" id="">
                 </div>
-                <button type="submit" class="btn-blue w-100 p-2 border-0">Masuk</button>
+                <button type="submit" id="btn-login" class="btn-blue w-100 p-2 border-0">Masuk</button>
             </form>
         </div>
     </div>
     @include('pages.client.panels.js')
+    <script>
+        $("#btn-login").click(function (e) {
+            e.preventDefault();
+            login()
+        });
+        function login(){
+            $("#btn-login").addClass('disabled')
+            $("#btn-login").text('Tunggu sebentar ...')
+            $(".card").addClass('box')
+            $('form').submit()
+        }
+      </script>
 </body>
 </html>
