@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CAuth;
 use App\Http\Controllers\Api\CBarang;
 use App\Http\Controllers\Api\CKategori;
+use App\Http\Controllers\Api\CUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,12 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::prefix('kategori')
     ->name('kategori.')
     ->controller(CKategori::class)
+    ->group(function(){
+        CRUD();
+    });
+    Route::prefix('user')
+    ->name('user.')
+    ->controller(CUser::class)
     ->group(function(){
         CRUD();
     });

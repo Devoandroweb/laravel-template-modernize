@@ -3,84 +3,46 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserEpicRequest;
 use App\Models\UserEpic;
+use App\Repositories\ApiHandle\ApiHandleRepository;
 use Illuminate\Http\Request;
 
 class CUser extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    protected $apiHandleRepository;
+    function __construct(ApiHandleRepository $apiHandleRepository){
+        $this->apiHandleRepository = $apiHandleRepository;
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    function list() {
+        return $this->apiHandleRepository->safeApiCall(function(){
+            $user = UserEpic::all();
+            return responseSuccess($user);
+        });
     }
+    function create(UserEpicRequest $userEpicRequest) {
+        return $this->apiHandleRepository->safeApiCall(function() use ($userEpicRequest){
+            $credentials = $userEpicRequest->validated();
+            // dd($credentials);
+            UserEpic::create($credentials);
+            return responseSuccess(['message'=>'Sukses Menambahkan Pengguna']);
+        });
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\UserEpic  $userEpic
-     * @return \Illuminate\Http\Response
-     */
-    public function show(UserEpic $userEpic)
-    {
-        //
+    function update(UserEpicRequest $userEpicRequest) {
+        return $this->apiHandleRepository->safeApiCall(function() use ($userEpicRequest){
+            $credentials = $userEpicRequest->validated();
+            // dd($credentials);
+            UserEpic::find($userEpicRequest->id_user)->update($credentials);
+            return responseSuccess(['message'=>'Sukses Mengubah Pengguna']);
+        });
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\UserEpic  $userEpic
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(UserEpic $userEpic)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserEpic  $userEpic
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, UserEpic $userEpic)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\UserEpic  $userEpic
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(UserEpic $userEpic)
-    {
-        //
+    function delete(){
+        return $this->apiHandleRepository->safeApiCall(function(){
+            $idUser = request('id_user');
+            // dd($id_barang);
+            UserEpic::find($idUser)->delete();
+            return responseSuccess(['message'=>'Sukses Menghapus Pengguna']);
+        });
     }
 }
