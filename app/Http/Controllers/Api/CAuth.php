@@ -10,7 +10,7 @@ class CAuth extends Controller
 {
     function authenticated(Request $request){
         try{
-            if (!Auth::attempt($request->only('email', 'password')))
+            if (!Auth::guard('cris')->attempt($request->only('username', 'password')))
             {
                 return response()->json([
                     'status' => FALSE,
@@ -20,7 +20,7 @@ class CAuth extends Controller
                 ], 200);
             }
 
-            $user = Auth::user();
+            $user = Auth::guard('cris')->user();
             $authToken = $user->createToken('auth_token')->plainTextToken;
             $data = ['status'=>TRUE,'message' => 'Berhasil Login', 'access_token' => $authToken, 'token_type' => 'Bearer'];
             return response()->json($data, 200);
@@ -28,7 +28,7 @@ class CAuth extends Controller
             return response()->json([
                 'status' => FALSE,
                 'message' => "Auth Failed !!",
-                'data' => null,
+                'data' => ['messages'=>$th->getMessage()],
                 'access_token' => null,
             ], 500);
         }
@@ -36,7 +36,7 @@ class CAuth extends Controller
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
-        
+
         return response()->json([
             'status' => TRUE,
             'message' => "Berhasil Logout",

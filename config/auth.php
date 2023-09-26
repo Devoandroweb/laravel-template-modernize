@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'siswas',
         ],
+        'cris' => [
+            'driver' => 'session',
+            'provider' => 'criss',
+        ],
     ],
 
     /*
@@ -72,6 +76,10 @@ return [
         'siswas' => [
             'driver' => 'eloquent',
             'model' => App\Models\MSiswa::class,
+        ],
+        'criss' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserEpic::class,
         ],
     ],
 

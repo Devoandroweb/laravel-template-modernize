@@ -15,10 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::create([
-            'name'=>'admin',
-            'email'=>'admin@mail.com',
+        // \App\Models\User::create([
+        //     'name'=>'admin',
+        //     'email'=>'admin@mail.com',
+        //     'password'=>Hash::make('admin'),
+        // ]);
+        \App\Models\UserEpic::create([
+            'username'=>'admin',
             'password'=>Hash::make('admin'),
+            'role'=>1
         ]);
     }
 }

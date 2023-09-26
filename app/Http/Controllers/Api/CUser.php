@@ -23,7 +23,6 @@ class CUser extends Controller
     function create(UserEpicRequest $userEpicRequest) {
         return $this->apiHandleRepository->safeApiCall(function() use ($userEpicRequest){
             $credentials = $userEpicRequest->validated();
-            // dd($credentials);
             UserEpic::create($credentials);
             return responseSuccess(['message'=>'Sukses Menambahkan Pengguna']);
         });
@@ -32,7 +31,6 @@ class CUser extends Controller
     function update(UserEpicRequest $userEpicRequest) {
         return $this->apiHandleRepository->safeApiCall(function() use ($userEpicRequest){
             $credentials = $userEpicRequest->validated();
-            // dd($credentials);
             UserEpic::find($userEpicRequest->id_user)->update($credentials);
             return responseSuccess(['message'=>'Sukses Mengubah Pengguna']);
         });

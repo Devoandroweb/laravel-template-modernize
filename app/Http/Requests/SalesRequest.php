@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Schema;
 
-class UserEpicRequest extends FormRequest
+class SalesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,7 +18,7 @@ class UserEpicRequest extends FormRequest
     {
         return true;
     }
-    /**
+/**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
@@ -26,13 +26,13 @@ class UserEpicRequest extends FormRequest
     public function rules()
     {
         $dataValidate = [
-            'id_user'=>'nullable',
-            'role'=>'required',
-            'username'=>'required',
-            'password'=>'required',
+            'id_sales'=>'nullable',
+            'kode_barang'=>'required',
+            'jumlah_sales'=>'required',
+            'tanggal_sales'=>'required',
         ];
-        if(is_null($this->id_user)){
-            $dataValidate['username'] = 'unique:user,username|required';
+        if(is_null($this->id_sales)){
+            $dataValidate['kode_barang'] = 'exists:barang,kode_barang|required';
         }
         return $dataValidate;
     }
@@ -41,7 +41,7 @@ class UserEpicRequest extends FormRequest
         // dd($validator->errors()->messages()['kode_barang']);
         $errors = [];
         $errorMessages = $validator->errors()->messages();
-        $keys = Schema::getColumnListing('user');
+        $keys = Schema::getColumnListing('sales');
 
         foreach ($keys as $key) {
             if(isset($errorMessages[$key])){
@@ -55,10 +55,10 @@ class UserEpicRequest extends FormRequest
     public function messages()
     {
         return [
-            'username.unique' => 'Username sudah tersedia',
-            'username.required' => 'Username tidak boleh kosong',
-            'role.required' => 'Role tidak boleh kosong',
-            'password.required' => 'Password tidak boleh kosong'
+            'kode_barang.exists' => 'Kode Barang tidak tersedia',
+            'kode_barang.required' => 'Kode Barang tidak boleh kosong',
+            'jumlah_sales.required' => 'Jumlah Sales tidak boleh kosong',
+            'tanggal_sales.required' => 'Tanggal Sales tidak boleh kosong'
         ];
 
     }

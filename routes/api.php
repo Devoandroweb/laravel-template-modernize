@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CAuth;
 use App\Http\Controllers\Api\CBarang;
 use App\Http\Controllers\Api\CKategori;
+use App\Http\Controllers\Api\CSales;
 use App\Http\Controllers\Api\CUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,12 @@ Route::middleware('auth:sanctum')->group(function(){
     ->controller(CKategori::class)
     ->group(function(){
         CRUD();
+    });
+    Route::prefix('sales')
+    ->name('sales.')
+    ->controller(CSales::class)
+    ->group(function(){
+        Route::post('create', 'create')->name('create');
     });
     Route::prefix('user')
     ->name('user.')
