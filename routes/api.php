@@ -3,6 +3,8 @@
 use App\Http\Controllers\Api\CAuth;
 use App\Http\Controllers\Api\CBarang;
 use App\Http\Controllers\Api\CKategori;
+use App\Http\Controllers\Api\CPengembalianBarang;
+use App\Http\Controllers\Api\CPenjualan;
 use App\Http\Controllers\Api\CSales;
 use App\Http\Controllers\Api\CUser;
 use Illuminate\Http\Request;
@@ -26,32 +28,51 @@ Route::middleware('auth:sanctum')->group(function(){
     ->name('barang.')
     ->controller(CBarang::class)
     ->group(function(){
-        CRUD();
+        Route::get('list', 'list')->name('list');
+    Route::post('update', 'update')->name('update');
+    Route::post('create', 'create')->name('create');
+    Route::post('delete', 'delete')->name('delete');
+        Route::get('based-on-kategori/{id_kategori}', 'getBarangWithKategori');
     });
     Route::prefix('kategori')
     ->name('kategori.')
     ->controller(CKategori::class)
     ->group(function(){
-        CRUD();
+        Route::get('list', 'list')->name('list');
+    Route::post('update', 'update')->name('update');
+    Route::post('create', 'create')->name('create');
+    Route::post('delete', 'delete')->name('delete');
     });
     Route::prefix('sales')
     ->name('sales.')
     ->controller(CSales::class)
     ->group(function(){
+        Route::get('list', 'list')->name('list');
+        Route::post('create', 'create')->name('create');
+    });
+    Route::prefix('penjualan')
+    ->name('penjualan.')
+    ->controller(CPenjualan::class)
+    ->group(function(){
+        Route::get('list', 'list')->name('list');
+        Route::post('create', 'create')->name('create');
+    });
+    Route::prefix('return')
+    ->name('return.')
+    ->controller(CPengembalianBarang::class)
+    ->group(function(){
+        Route::get('list', 'list')->name('list');
         Route::post('create', 'create')->name('create');
     });
     Route::prefix('user')
     ->name('user.')
     ->controller(CUser::class)
     ->group(function(){
-        CRUD();
+        Route::get('list', 'list')->name('list');
+    Route::post('update', 'update')->name('update');
+    Route::post('create', 'create')->name('create');
+    Route::post('delete', 'delete')->name('delete');
     });
 });
 
 #FUNCTION
-function CRUD(){
-    Route::get('list', 'list')->name('list');
-    Route::post('update', 'update')->name('update');
-    Route::post('create', 'create')->name('create');
-    Route::post('delete', 'delete')->name('delete');
-}

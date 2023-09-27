@@ -3,84 +3,39 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PenjualanRequest;
+use App\Http\Requests\ReturnBarangRequest;
 use App\Models\PengembalianBarang;
+use App\Repositories\ApiHandle\ApiHandleRepository;
+use App\Repositories\SystemEpic\SystemEpicRepository;
 use Illuminate\Http\Request;
 
 class CPengembalianBarang extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    protected $systemEpicRepository;
+    protected $apiHandleRepository;
+    function __construct(
+        SystemEpicRepository $systemEpicRepository,
+        ApiHandleRepository $apiHandleRepository
+        ){
+        $this->systemEpicRepository = $systemEpicRepository;
+        $this->apiHandleRepository = $apiHandleRepository;
     }
+    function create(ReturnBarangRequest $returnBarangRequest) {
+        return $this->apiHandleRepository->safeApiCall(function() use ($returnBarangRequest){
+            $credentials = $returnBarangRequest->validated();
+            if($this->systemEpicRepository->addReturnBarangAndStock($credentials)){
+                return responseSuccess(['message'=>'Sukses Menambahkan Pemngembalian']);
+            }else{
+                return responseFailed('Kode Barang tidak ditemukan');
+            };
+        });
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\PengembalianBarang  $pengembalianBarang
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PengembalianBarang $pengembalianBarang)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\PengembalianBarang  $pengembalianBarang
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PengembalianBarang $pengembalianBarang)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PengembalianBarang  $pengembalianBarang
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, PengembalianBarang $pengembalianBarang)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\PengembalianBarang  $pengembalianBarang
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PengembalianBarang $pengembalianBarang)
-    {
-        //
+    function list() {
+        return $this->apiHandleRepository->safeApiCall(function(){
+            $barang = PengembalianBarang::all();
+            return responseSuccess($barang);
+        });
     }
 }

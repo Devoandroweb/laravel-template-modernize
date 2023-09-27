@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Schema;
 
-class SalesRequest extends FormRequest
+class ReturnBarangRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,18 +18,14 @@ class SalesRequest extends FormRequest
     {
         return true;
     }
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
+
     public function rules()
     {
         $dataValidate = [
-            'id_sales'=>'nullable',
+            'id_data_pengembalian_barang'=>'nullable',
             'kode_barang'=>'required',
-            'jumlah_sales'=>'required',
-            'tanggal_sales'=>'required',
+            'jumlah_barang'=>'required',
+            'tanggal_pengembalian'=>'required',
         ];
         if(is_null($this->id_sales)){
             $dataValidate['kode_barang'] = 'exists:barang,kode_barang|required';
@@ -41,7 +37,7 @@ class SalesRequest extends FormRequest
         // dd($validator->errors()->messages()['kode_barang']);
         $errors = [];
         $errorMessages = $validator->errors()->messages();
-        $keys = Schema::getColumnListing('sales');
+        $keys = Schema::getColumnListing('penjualan');
 
         foreach ($keys as $key) {
             if(isset($errorMessages[$key])){
@@ -57,8 +53,8 @@ class SalesRequest extends FormRequest
         return [
             'kode_barang.exists' => 'Kode Barang tidak tersedia',
             'kode_barang.required' => 'Kode Barang tidak boleh kosong',
-            'jumlah_sales.required' => 'Jumlah Sales tidak boleh kosong',
-            'tanggal_sales.required' => 'Tanggal Sales tidak boleh kosong'
+            'jumlah_barang.required' => 'Jumlah Barang tidak boleh kosong',
+            'tanggal_pengembalian.required' => 'Tanggal Pengembalian tidak boleh kosong'
         ];
 
     }

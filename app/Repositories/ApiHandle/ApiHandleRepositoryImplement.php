@@ -3,6 +3,7 @@
 namespace App\Repositories\ApiHandle;
 
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use LaravelEasyRepository\Implementations\Eloquent;
 use App\Models\ApiHandle;
 
@@ -28,6 +29,7 @@ class ApiHandleRepositoryImplement extends Eloquent implements ApiHandleReposito
             return $callback();
         } catch (\Throwable $th) {
             //throw $th;
+            DB::rollBack();
             return responseFailed($th->getMessage());
         }
     }

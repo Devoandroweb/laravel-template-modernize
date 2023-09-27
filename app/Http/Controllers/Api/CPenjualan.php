@@ -3,84 +3,37 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PenjualanRequest;
 use App\Models\Penjualan;
+use App\Repositories\ApiHandle\ApiHandleRepository;
+use App\Repositories\SystemEpic\SystemEpicRepository;
 use Illuminate\Http\Request;
 
 class CPenjualan extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    protected $systemEpicRepository;
+    protected $apiHandleRepository;
+    function __construct(
+        SystemEpicRepository $systemEpicRepository,
+        ApiHandleRepository $apiHandleRepository
+        ){
+        $this->systemEpicRepository = $systemEpicRepository;
+        $this->apiHandleRepository = $apiHandleRepository;
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    function create(PenjualanRequest $penjualanRequest) {
+        return $this->apiHandleRepository->safeApiCall(function() use ($penjualanRequest){
+            $credentials = $penjualanRequest->validated();
+            if($this->systemEpicRepository->addPenjualanAndReduceStock($credentials)){
+                return responseSuccess(['message'=>'Sukses Menambahkan Penjualan']);
+            }else{
+                return responseFailed('Kode Barang tidak ditemukan');
+            };
+        });
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Penjualan  $penjualan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Penjualan $penjualan)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Penjualan  $penjualan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Penjualan $penjualan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Penjualan  $penjualan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Penjualan $penjualan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Penjualan  $penjualan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Penjualan $penjualan)
-    {
-        //
+    function list() {
+        return $this->apiHandleRepository->safeApiCall(function(){
+            $barang = Penjualan::all();
+            return responseSuccess($barang);
+        });
     }
 }
