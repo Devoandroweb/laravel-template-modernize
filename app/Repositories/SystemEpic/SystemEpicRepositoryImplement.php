@@ -35,7 +35,6 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
     function addSalesAndStock($credentials) {
         $kodeBarang = $credentials['kode_barang'];
         $persediaan = $this->persediaan->whereKodeBarang($kodeBarang)->first();
-
         if($persediaan){
             $persediaan->jumlah_barang += (int)$credentials['jumlah_sales'];
             $this->sales->create($credentials);
