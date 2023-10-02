@@ -11,4 +11,7 @@ class Penjualan extends Model
     protected $table = 'penjualan';
     protected $primaryKey = 'id_penjualan';
     protected $fillable = ['id_barang', 'tanggal_penjualan', 'jumlah_penjualan'];
+    function barang(){
+        return $this->hasOne(MBarang::class,'id_barang','id_barang');
+    }
 }

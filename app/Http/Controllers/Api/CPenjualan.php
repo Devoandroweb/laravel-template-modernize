@@ -36,4 +36,13 @@ class CPenjualan extends Controller
             return responseSuccess($barang);
         });
     }
+    function delete($id_penjualan){
+        return $this->apiHandleRepository->safeApiCall(function() use ($id_penjualan){
+            if($this->systemEpicRepository->reducePenjualanAndStock($id_penjualan) == 1){
+                return responseSuccess(['message'=>'Sukses Mengahapus Penjualan']);
+            }else{
+                return responseFailed("Sukses Mengahapus Penjualan");
+            };
+        });
+    }
 }

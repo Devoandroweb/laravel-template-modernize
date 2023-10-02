@@ -58,6 +58,8 @@ Route::middleware('auth:sanctum')->group(function(){
     ->group(function(){
         Route::get('list', 'list')->name('list');
         Route::post('create', 'create')->name('create');
+        Route::get('delete/{id_penjualan}', 'delete')->name('delete');
+
     });
     Route::prefix('return')
     ->name('return.')

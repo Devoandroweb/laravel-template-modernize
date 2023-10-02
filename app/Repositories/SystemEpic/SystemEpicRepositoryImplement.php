@@ -84,6 +84,15 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         }else{
             return -1;
         }
-
+    }
+    function reducePenjualanAndStock($id_penjualan){
+        $penjualan = Penjualan::whereIdPenjualan($id_penjualan)->first();
+        $persediaan = Persediaan::whereIdBarang($penjualan->id_barang)->first();
+        $persediaan->jumlah_barang += $penjualan->jumlah_penjualan;
+        if($persediaan->update()){
+            $penjualan->delete();
+            return 1;
+        }
+        return 0;
     }
 }
