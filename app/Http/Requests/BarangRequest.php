@@ -38,7 +38,7 @@ class BarangRequest extends FormRequest
         if($this->is_create == 1){
             $dataValidate['kode_barang'] = 'unique:barang,kode_barang|required';
         }else{
-            $dataValidate['old_kode_barang'] = ['required',Rule::unique('barang')->ignore($this->kode_barang)];
+            $dataValidate['kode_barang'] = ['required',Rule::unique('barang')->ignore($this->kode_barang)];
         }
         return $dataValidate;
     }
