@@ -40,7 +40,8 @@ class CBarang extends Controller
     function update(BarangRequest $barangRequest) {
         return $this->apiHandleRepository->safeApiCall(function() use ($barangRequest){
             $credentials = $barangRequest->validated();
-            MBarang::whereKodeBarang($barangRequest->kode_barang)->update($credentials);
+            $oldKodeBarang = $credentials['old_kode_barang'];
+            MBarang::whereKodeBarang($oldKodeBarang)->update($credentials);
             if(isset($credentials['kode_barang'])){
                 Persediaan::whereKodeBarang($barangRequest->kode_barang)->update([
                     'kode_barang' => $credentials['kode_barang'],
