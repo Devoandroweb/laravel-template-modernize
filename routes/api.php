@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\CBarang;
 use App\Http\Controllers\Api\CKategori;
 use App\Http\Controllers\Api\CPengembalianBarang;
 use App\Http\Controllers\Api\CPenjualan;
+use App\Http\Controllers\Api\CPersediaan;
 use App\Http\Controllers\Api\CSales;
 use App\Http\Controllers\Api\CUser;
 use Illuminate\Http\Request;
@@ -72,6 +73,12 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('update', 'update')->name('update');
     Route::post('create', 'create')->name('create');
     Route::post('delete', 'delete')->name('delete');
+    });
+    Route::prefix('persediaan')
+    ->name('persediaan.')
+    ->controller(CPersediaan::class)
+    ->group(function(){
+        Route::get('list', 'list')->name('list');
     });
 });
 
