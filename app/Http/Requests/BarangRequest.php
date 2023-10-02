@@ -28,6 +28,7 @@ class BarangRequest extends FormRequest
     public function rules()
     {
         $dataValidate = [
+            'old_kode_barang'=>'nullable',
             'nama_barang'=>'required',
             'satuan'=>'required',
             'id_kategori'=>'required',
@@ -35,6 +36,8 @@ class BarangRequest extends FormRequest
         ];
         if($this->is_create == 1){
             $dataValidate['kode_barang'] = 'unique:barang,kode_barang|required';
+        }else{
+            $dataValidate['old_kode_barang'] = 'unique:barang,kode_barang|required';
         }
         return $dataValidate;
     }
