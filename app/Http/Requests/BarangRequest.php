@@ -8,6 +8,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Validation\Rule;
 class BarangRequest extends FormRequest
 {
     /**
@@ -37,7 +38,7 @@ class BarangRequest extends FormRequest
         if($this->is_create == 1){
             $dataValidate['kode_barang'] = 'unique:barang,kode_barang|required';
         }else{
-            $dataValidate['old_kode_barang'] = 'unique:barang,kode_barang|required';
+            $dataValidate['old_kode_barang'] = ['required',Rule::unique('kode_barang')->ignore($this->kode_barang)];
         }
         return $dataValidate;
     }
