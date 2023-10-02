@@ -10,4 +10,5 @@ interface SystemEpicRepository extends Repository{
     function addSalesAndStock($credentials);
     function addPenjualanAndReduceStock($credentials);
     function addReturnBarangAndStock($credentials) ;
+    function reduceSalesAndStock($id_sales);
 }

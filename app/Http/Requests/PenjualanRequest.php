@@ -23,13 +23,11 @@ class PenjualanRequest extends FormRequest
     {
         $dataValidate = [
             'id_penjualan'=>'nullable',
-            'kode_barang'=>'required',
+            'id_barang'=>'required',
             'jumlah_penjualan'=>'required',
             'tanggal_penjualan'=>'required',
         ];
-        if(is_null($this->id_sales)){
-            $dataValidate['kode_barang'] = 'exists:barang,kode_barang|required';
-        }
+
         return $dataValidate;
     }
     public function failedValidation(Validator $validator)
@@ -51,7 +49,6 @@ class PenjualanRequest extends FormRequest
     public function messages()
     {
         return [
-            'kode_barang.exists' => 'Kode Barang tidak tersedia',
             'kode_barang.required' => 'Kode Barang tidak boleh kosong',
             'jumlah_penjualan.required' => 'Jumlah Penjualan tidak boleh kosong',
             'tanggal_penjualan.required' => 'Tanggal Penjualan tidak boleh kosong'

@@ -39,5 +39,16 @@ class CSales extends Controller
             return responseSuccess($barang);
         });
     }
+    function delete($id_sales){
+        return $this->apiHandleRepository->safeApiCall(function() use ($id_sales){
+            if($this->systemEpicRepository->reduceSalesAndStock($id_sales) == 1){
+                return responseSuccess(['message'=>'Sukses Mengahapus Sales']);
+            }elseif($this->systemEpicRepository->reduceSalesAndStock($id_sales) == 0){
+                return responseFailed('ID Sales tidak ditemukan');
+            }else{
+                return responseFailed("Jumlah Persediaan tidak mencukupi");
+            };
+        });
+    }
 
 }

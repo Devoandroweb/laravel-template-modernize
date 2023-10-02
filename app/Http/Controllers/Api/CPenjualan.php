@@ -26,7 +26,7 @@ class CPenjualan extends Controller
             if($this->systemEpicRepository->addPenjualanAndReduceStock($credentials)){
                 return responseSuccess(['message'=>'Sukses Menambahkan Penjualan']);
             }else{
-                return responseFailed('Kode Barang tidak ditemukan');
+                return responseFailed('ID Barang tidak ditemukan');
             };
         });
     }

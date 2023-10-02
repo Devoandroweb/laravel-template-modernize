@@ -3,6 +3,7 @@
 namespace App\Repositories\SystemEpic;
 
 use App\Models\PengembalianBarang;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use LaravelEasyRepository\Implementations\Eloquent;
 use App\Models\SystemEpic;
 use App\Models\Penjualan;
@@ -33,8 +34,9 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         $this->pengembalianBarang = $pengembalianBarang;
     }
     function addSalesAndStock($credentials) {
-        $kodeBarang = $credentials['kode_barang'];
-        $persediaan = $this->persediaan->whereKodeBarang($kodeBarang)->first();
+        $idBarang = $credentials['id_barang'];
+        $persediaan = $this->persediaan->whereIdBarang($idBarang)->first();
+        // dd($persediaan);
         if($persediaan){
             $persediaan->jumlah_barang += (int)$credentials['jumlah_sales'];
             $this->sales->create($credentials);
@@ -45,8 +47,8 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         }
     }
     function addPenjualanAndReduceStock($credentials) {
-        $kodeBarang = $credentials['kode_barang'];
-        $persediaan = $this->persediaan->whereKodeBarang($kodeBarang)->first();
+        $idBarang = $credentials['id_barang'];
+        $persediaan = $this->persediaan->whereIdBarang($idBarang)->first();
         if($persediaan){
             $persediaan->jumlah_barang -= (int)$credentials['jumlah_penjualan'];
             $this->penjualan->create($credentials);
@@ -68,5 +70,20 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         }else{
             return false;
         }
+    }
+    function reduceSalesAndStock($id_sales){
+        $sales = Sales::whereIdSales($id_sales)->first();
+        $persediaan = Persediaan::whereIdBarang($sales->id_barang)->first();
+        if($persediaan->jumlah_barang > $sales->jumlah_sales){
+            $persediaan->jumlah_barang -= $sales->jumlah_sales;
+            if($persediaan->update()){
+                $sales->delete();
+                return 1;
+            }
+            return 0;
+        }else{
+            return -1;
+        }
+
     }
 }

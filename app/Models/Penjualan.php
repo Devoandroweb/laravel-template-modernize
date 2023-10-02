@@ -10,5 +10,5 @@ class Penjualan extends Model
     use HasFactory;
     protected $table = 'penjualan';
     protected $primaryKey = 'id_penjualan';
-    protected $fillable = ['kode_barang', 'tanggal_penjualan', 'jumlah_penjualan'];
+    protected $fillable = ['id_barang', 'tanggal_penjualan', 'jumlah_penjualan'];
 }

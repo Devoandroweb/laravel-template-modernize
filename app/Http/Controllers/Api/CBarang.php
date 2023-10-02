@@ -27,9 +27,10 @@ class CBarang extends Controller
             $credentials = $barangRequest->validated();
             // dd($credentials);
             DB::transaction(function() use ($credentials) {
-                MBarang::create($credentials);
+                $barang = MBarang::create($credentials);
+
                 Persediaan::create([
-                    'kode_barang' => $credentials['kode_barang'],
+                    'id_barang' => $barang->id_barang,
                 ]);
             });
             DB::commit();
@@ -40,10 +41,10 @@ class CBarang extends Controller
     function update(BarangRequest $barangRequest) {
         return $this->apiHandleRepository->safeApiCall(function() use ($barangRequest){
             $credentials = $barangRequest->validated();
-            $barang = MBarang::whereIdBarang($credentials['id_barang'])->update($credentials);
+            MBarang::whereIdBarang($credentials['id_barang'])->update($credentials);
             if(isset($credentials['kode_barang'])){
-                Persediaan::whereKodeBarang($barang->kode_barang)->update([
-                    'kode_barang' => $credentials['kode_barang'],
+                Persediaan::whereIdBarang($barangRequest->id_barang)->update([
+                    'id_barang' => $credentials['id_barang'],
                 ]);
             }
             return responseSuccess(['message'=>'Sukses Mengubah Barang']);
