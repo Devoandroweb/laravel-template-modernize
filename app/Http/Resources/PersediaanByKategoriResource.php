@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BarangResource extends JsonResource
+class PersediaanByKategoriResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,13 +14,14 @@ class BarangResource extends JsonResource
      */
     public function toArray($request)
     {
+        $jumlahTotal = 0;
+        foreach ($this->barang as $b) {
+            $jumlahTotal += (int)$b->persediaan->jumlah_barang;
+        }
         return [
-            "id_barang"=>$this->id_barang,
-            "kode_barang"=>$this->kode_barang,
-            "nama_barang"=>$this->nama_barang,
-            "satuan"=>$this->satuan,
-            "nama_kategori"=>$this->kategori?->nama_kategori ?? "-",
-            "minimal_persediaan"=>$this->minimal_persediaan,
+            'nama_kategori'=>$this->nama_kategori,
+            'jumlah_macam'=>$this->barang->count(),
+            'jumlah_total'=>$jumlahTotal
         ];
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\CPenjualan;
 use App\Http\Controllers\Api\CPersediaan;
 use App\Http\Controllers\Api\CSales;
 use App\Http\Controllers\Api\CUser;
+use App\Http\Controllers\CUserEpic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,19 +31,20 @@ Route::middleware('auth:sanctum')->group(function(){
     ->controller(CBarang::class)
     ->group(function(){
         Route::get('list', 'list')->name('list');
-    Route::post('update', 'update')->name('update');
-    Route::post('create', 'create')->name('create');
-    Route::post('delete', 'delete')->name('delete');
-        Route::get('based-on-kategori/{id_kategori}', 'getBarangWithKategori');
+        Route::post('update', 'update')->name('update');
+        Route::post('create', 'create')->name('create');
+        Route::post('delete', 'delete')->name('delete');
+        Route::get('list-by-kategori/{id_kategori}', 'getBarangWithKategori');
+        Route::get('dropdown-search', 'dropdownSearch');
     });
     Route::prefix('kategori')
     ->name('kategori.')
     ->controller(CKategori::class)
     ->group(function(){
         Route::get('list', 'list')->name('list');
-    Route::post('update', 'update')->name('update');
-    Route::post('create', 'create')->name('create');
-    Route::post('delete', 'delete')->name('delete');
+        Route::post('update', 'update')->name('update');
+        Route::post('create', 'create')->name('create');
+        Route::post('delete', 'delete')->name('delete');
     });
     Route::prefix('sales')
     ->name('sales.')
@@ -67,22 +69,27 @@ Route::middleware('auth:sanctum')->group(function(){
     ->group(function(){
         Route::get('list', 'list')->name('list');
         Route::post('create', 'create')->name('create');
+        Route::post('edit', 'edit')->name('edit');
     });
     Route::prefix('user')
     ->name('user.')
     ->controller(CUser::class)
     ->group(function(){
         Route::get('list', 'list')->name('list');
-    Route::post('update', 'update')->name('update');
-    Route::post('create', 'create')->name('create');
-    Route::post('delete', 'delete')->name('delete');
+        Route::post('update', 'update')->name('update');
+        Route::post('create', 'create')->name('create');
+        Route::post('delete', 'delete')->name('delete');
+        Route::get('profile/{id_user}', 'profile')->name('profile');
+        Route::post('update-foto-profile', 'updateFotoProfile')->name('update-foto-profile');
     });
     Route::prefix('persediaan')
     ->name('persediaan.')
     ->controller(CPersediaan::class)
     ->group(function(){
         Route::get('list', 'list')->name('list');
+        Route::get('list-by-kategori/{id_kategori}', 'listByKategory')->name('list-by-kategori');
     });
+
 });
 
 #FUNCTION

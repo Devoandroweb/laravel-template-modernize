@@ -32,4 +32,20 @@ function responseErrorValidate($validator){
         'data' => $validator
     ],422);
 }
-
+function uploadImage($dir, $file)
+{
+    $result = null;
+    $namaFile = time() . "_" . generateRandomString(20) . "." . $file->extension();
+    $file->move($dir, $namaFile);
+    $result = $namaFile;
+    return $result;
+}
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}

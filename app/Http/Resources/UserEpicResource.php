@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BarangResource extends JsonResource
+class UserEpicResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,12 +15,13 @@ class BarangResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id_barang"=>$this->id_barang,
-            "kode_barang"=>$this->kode_barang,
-            "nama_barang"=>$this->nama_barang,
-            "satuan"=>$this->satuan,
-            "nama_kategori"=>$this->kategori?->nama_kategori ?? "-",
-            "minimal_persediaan"=>$this->minimal_persediaan,
+            "id_user" => $this->id_user,
+            "nama_toko" => $this->nama_toko,
+            "nama" => $this->nama,
+            "email" => $this->email,
+            "username" => $this->username,
+            "role" => $this->role,
+            "foto" => url('public/images/user/'.$this->foto)
         ];
     }
 }

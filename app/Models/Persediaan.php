@@ -11,4 +11,7 @@ class Persediaan extends Model
     protected $table = 'persediaan';
     protected $primaryKey = 'id_persediaan';
     protected $fillable = ['id_barang', 'jumlah_barang'];
+    function barang(){
+        return $this->hasOne(MBarang::class,'id_barang','id_barang');
+    }
 }

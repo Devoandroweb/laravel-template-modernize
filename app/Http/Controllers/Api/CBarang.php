@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BarangRequest;
+use App\Http\Resources\BarangResource;
 use App\Models\MBarang;
 use App\Models\Persediaan;
 use App\Repositories\ApiHandle\ApiHandleRepository;
@@ -19,6 +20,7 @@ class CBarang extends Controller
     function list() {
         return $this->apiHandleRepository->safeApiCall(function(){
             $barang = MBarang::all();
+            $barang = BarangResource::collection($barang);
             return responseSuccess($barang);
         });
     }
@@ -65,8 +67,17 @@ class CBarang extends Controller
         return $this->apiHandleRepository->safeApiCall(function()use($id_kategori){
             // dd($kode_barang);
             $barang = MBarang::whereIdKategori($id_kategori)->get();
+            $barang = BarangResource::collection($barang);
             return responseSuccess($barang);
         });
     }
-
+    function dropdownSearch(){
+        return $this->apiHandleRepository->safeApiCall(function(){
+            // dd($kode_barang);
+            $q = request()->query('q');
+            $barang = MBarang::where("nama_barang","like","%".$q."%")->get();
+            $barang = BarangResource::collection($barang);
+            return responseSuccess($barang);
+        });
+    }
 }

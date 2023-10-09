@@ -27,6 +27,9 @@ class UserEpicRequest extends FormRequest
     {
         $dataValidate = [
             'id_user'=>'nullable',
+            'nama_toko'=>'requred',
+            'nama'=>'required',
+            'email'=>'nullable',
             'role'=>'required',
             'username'=>'required',
             'password'=>'required',
@@ -57,6 +60,8 @@ class UserEpicRequest extends FormRequest
         return [
             'username.unique' => 'Username sudah tersedia',
             'username.required' => 'Username tidak boleh kosong',
+            'nama_toko.required' => 'Nama Toko tidak boleh kosong',
+            'nama.required' => 'Nama Pengguna tidak boleh kosong',
             'role.required' => 'Role tidak boleh kosong',
             'password.required' => 'Password tidak boleh kosong'
         ];

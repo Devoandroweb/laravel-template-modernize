@@ -38,4 +38,5 @@ class CPengembalianBarang extends Controller
             return responseSuccess($barang);
         });
     }
+
 }
