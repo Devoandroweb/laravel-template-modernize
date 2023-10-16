@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PersediaanByKategoriResource;
+use App\Http\Resources\PersediaanResource;
 use App\Models\MBarang;
 use App\Models\MKategori;
 use App\Models\Persediaan;
@@ -27,6 +28,7 @@ class CPersediaan extends Controller
     function list() {
         return $this->apiHandleRepository->safeApiCall(function(){
             $persediaan = Persediaan::all();
+            $persediaan = PersediaanResource::collection($persediaan);
             return responseSuccess($persediaan);
         });
     }

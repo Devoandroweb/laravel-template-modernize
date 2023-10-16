@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CPengembalianBarang;
 use App\Http\Controllers\Api\CPenjualan;
 use App\Http\Controllers\Api\CPersediaan;
 use App\Http\Controllers\Api\CSales;
+use App\Http\Controllers\Api\CStatistik;
 use App\Http\Controllers\Api\CUser;
 use App\Http\Controllers\CUserEpic;
 use Illuminate\Http\Request;
@@ -79,8 +80,14 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::post('update', 'update')->name('update');
         Route::post('create', 'create')->name('create');
         Route::post('delete', 'delete')->name('delete');
-        Route::get('profile/{id_user}', 'profile')->name('profile');
-        Route::post('update-foto-profile', 'updateFotoProfile')->name('update-foto-profile');
+    });
+    Route::prefix('profile')
+    ->name('profile.')
+    ->controller(CUser::class)
+    ->group(function(){
+        Route::get('{id_user}', 'profile')->name('profile');
+        Route::post('{id_user}/update-foto-profile', 'updateFotoProfile')->name('update-foto-profile');
+        Route::post('{id_user}/update', 'updateProfile')->name('update');
     });
     Route::prefix('persediaan')
     ->name('persediaan.')
@@ -89,7 +96,12 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('list', 'list')->name('list');
         Route::get('list-by-kategori/{id_kategori}', 'listByKategory')->name('list-by-kategori');
     });
-
+    Route::prefix('statistik')
+    ->name('statistik.')
+    ->controller(CStatistik::class)
+    ->group(function(){
+        Route::get('penjualan', 'penjualan')->name('penjualan');
+    });
 });
 
 #FUNCTION

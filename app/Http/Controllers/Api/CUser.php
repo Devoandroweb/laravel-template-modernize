@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\UserEpicRequest;
 use App\Http\Resources\UserEpicResource;
 use App\Models\UserEpic;
@@ -22,13 +23,7 @@ class CUser extends Controller
             return responseSuccess($user);
         });
     }
-    function profile($id_user) {
-        return $this->apiHandleRepository->safeApiCall(function()use($id_user){
-            $user = UserEpic::find($id_user);
-            $user = UserEpicResource::make($user);
-            return responseSuccess($user);
-        });
-    }
+
     function create(UserEpicRequest $userEpicRequest) {
         return $this->apiHandleRepository->safeApiCall(function() use ($userEpicRequest){
             $credentials = $userEpicRequest->validated();
@@ -52,15 +47,35 @@ class CUser extends Controller
             return responseSuccess(['message'=>'Sukses Menghapus Pengguna']);
         });
     }
-    function updateFotoProfile() {
-        return $this->apiHandleRepository->safeApiCall(function(){
+    function profile($id_user) {
+        return $this->apiHandleRepository->safeApiCall(function()use($id_user){
+            $user = UserEpic::find($id_user);
+            $user = UserEpicResource::make($user);
+            return responseSuccess($user);
+        });
+    }
+function updateFotoProfile($id_user) {
+        return $this->apiHandleRepository->safeApiCall(function()use($id_user){
             if(request()->hasFile('foto')){
                 $nameFileFoto = uploadImage(public_path("images/user"),request()->file('foto'));
-                UserEpic::find(request()->id_user)->update([
+                $user = UserEpic::find($id_user);
+                @unlink(public_path("images/user/".$user->foto));
+                $user->update([
                     'foto' => $nameFileFoto
                 ]);
             }
             return responseSuccess(['message'=>'Sukses Mengubah Foto Pengguna']);
+        });
+    }
+    function updateProfile($id_user, UpdateProfileRequest $updateProfileRequest) {
+        return $this->apiHandleRepository->safeApiCall(function()use($updateProfileRequest,$id_user){
+            $credentials = $updateProfileRequest->validated();
+
+            $user = UserEpic::find($id_user);
+            $user->{$credentials['name']} = $credentials['value'];
+            $user->update();
+
+            return responseSuccess(['message'=>'Sukses Mengubah Data Pengguna']);
         });
     }
 
