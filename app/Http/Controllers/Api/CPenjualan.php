@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PenjualanRequest;
+use App\Http\Resources\PenjualanResource;
 use App\Models\Penjualan;
 use App\Repositories\ApiHandle\ApiHandleRepository;
 use App\Repositories\SystemEpic\SystemEpicRepository;
@@ -32,8 +33,9 @@ class CPenjualan extends Controller
     }
     function list() {
         return $this->apiHandleRepository->safeApiCall(function(){
-            $barang = Penjualan::all();
-            return responseSuccess($barang);
+            $penjualan = Penjualan::all();
+            $penjualan = PenjualanResource::collection($penjualan);
+            return responseSuccess($penjualan);
         });
     }
     function delete($id_penjualan){

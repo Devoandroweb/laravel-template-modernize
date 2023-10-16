@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SalesRequest;
+use App\Http\Resources\SalesResource;
 use App\Models\Sales;
 use App\Repositories\ApiHandle\ApiHandleRepository;
 use App\Repositories\Sales\SalesRepository;
@@ -35,8 +36,9 @@ class CSales extends Controller
     }
     function list() {
         return $this->apiHandleRepository->safeApiCall(function(){
-            $barang = Sales::all();
-            return responseSuccess($barang);
+            $sales = Sales::all();
+            $sales = SalesResource::collection($sales);
+            return responseSuccess($sales);
         });
     }
     function delete($id_sales){

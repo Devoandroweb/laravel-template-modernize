@@ -49,3 +49,38 @@ function generateRandomString($length = 10) {
     }
     return $randomString;
 }
+function convertDate($date, $withDay = true, $withMinute = true)
+{
+    if ($date != null ||  $date != "") {
+        $nama_hari    =   array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
+        $nama_bulan   =   array(
+            1 => "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+        );
+        $tahun        =   substr($date, 0, 4);
+        $bulan        =   $nama_bulan[(int)substr($date, 5, 2)];
+        $tanggal      =   substr($date, 8, 2);
+
+        $text         =   "";
+
+        if ($withDay) {
+
+            $urutan_hari  =   date('w', mktime(0, 0, 0, substr($date, 5, 2), $tanggal, $tahun));
+            $hari         =   $nama_hari[$urutan_hari];
+            $text         .=  $hari . ", ";
+        }
+
+        $text         .= $tanggal . " " . $bulan . " " . $tahun;
+
+        if ($withMinute) {
+
+            $jam    =   substr($date, 11, 2);
+            $menit  =   substr($date, 14, 2);
+
+            $text   .=  ", " . $jam . ":" . $menit;
+        }
+    } else {
+
+        $text = "-";
+    }
+    return $text;
+}

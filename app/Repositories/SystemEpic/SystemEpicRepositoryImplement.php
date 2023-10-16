@@ -59,8 +59,8 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         }
     }
     function addReturnBarangAndStock($credentials) {
-        $kodeBarang = $credentials['kode_barang'];
-        $persediaan = $this->persediaan->whereKodeBarang($kodeBarang)->first();
+        $idBarang = $credentials['id_barang'];
+        $persediaan = $this->persediaan->whereIdBarang($idBarang)->first();
 
         if($persediaan){
             $persediaan->jumlah_barang += (int)$credentials['jumlah_barang'];

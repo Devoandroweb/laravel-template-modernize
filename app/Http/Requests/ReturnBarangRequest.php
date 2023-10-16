@@ -23,12 +23,12 @@ class ReturnBarangRequest extends FormRequest
     {
         $dataValidate = [
             'id_data_pengembalian_barang'=>'nullable',
-            'kode_barang'=>'required',
+            'id_barang'=>'required',
             'jumlah_barang'=>'required',
             'tanggal_pengembalian'=>'required',
         ];
         if(is_null($this->id_sales)){
-            $dataValidate['kode_barang'] = 'exists:barang,kode_barang|required';
+            $dataValidate['id_barang'] = 'exists:barang,id_barang|required';
         }
         return $dataValidate;
     }
@@ -37,7 +37,7 @@ class ReturnBarangRequest extends FormRequest
         // dd($validator->errors()->messages()['kode_barang']);
         $errors = [];
         $errorMessages = $validator->errors()->messages();
-        $keys = Schema::getColumnListing('penjualan');
+        $keys = Schema::getColumnListing('pengembalian_barang');
 
         foreach ($keys as $key) {
             if(isset($errorMessages[$key])){
@@ -51,8 +51,8 @@ class ReturnBarangRequest extends FormRequest
     public function messages()
     {
         return [
-            'kode_barang.exists' => 'Kode Barang tidak tersedia',
-            'kode_barang.required' => 'Kode Barang tidak boleh kosong',
+            'id_barang.exists' => 'Kode Barang tidak tersedia',
+            'id_barang.required' => 'Kode Barang tidak boleh kosong',
             'jumlah_barang.required' => 'Jumlah Barang tidak boleh kosong',
             'tanggal_pengembalian.required' => 'Tanggal Pengembalian tidak boleh kosong'
         ];

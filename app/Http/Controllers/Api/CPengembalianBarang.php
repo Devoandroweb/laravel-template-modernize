@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PenjualanRequest;
 use App\Http\Requests\ReturnBarangRequest;
+use App\Http\Resources\PengembalianBarangResource;
 use App\Models\PengembalianBarang;
 use App\Repositories\ApiHandle\ApiHandleRepository;
 use App\Repositories\SystemEpic\SystemEpicRepository;
@@ -34,8 +35,9 @@ class CPengembalianBarang extends Controller
     }
     function list() {
         return $this->apiHandleRepository->safeApiCall(function(){
-            $barang = PengembalianBarang::all();
-            return responseSuccess($barang);
+            $pengembalian = PengembalianBarang::all();
+            $pengembalian = PengembalianBarangResource::collection($pengembalian);
+            return responseSuccess($pengembalian);
         });
     }
 
