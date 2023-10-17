@@ -11,5 +11,7 @@ class MMateri extends Model
     protected $table = 'materi';
     protected $primaryKey = 'id_materi';
     protected $fillable = ['judul','isi','gambar'];
-
+    function subMateri(){
+        return $this->hasOne(SubMateri::class,'id_materi','id_materi');
+    }
 }

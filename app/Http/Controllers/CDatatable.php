@@ -8,6 +8,7 @@ use App\Models\MMateri;
 use App\Models\MSiswa;
 use App\Models\NilaiLatihan;
 use App\Models\Permainan;
+use App\Models\SubMateri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -23,6 +24,27 @@ class CDatatable extends Controller
                 '.csrf_field().'
                 <div class="btn-group" role="group">
                     <a href="'.route('master.materi.edit',$row).'" class="btn btn-small btn-info">Ubah</a>
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="submit" class="btn btn-small btn-danger" value="Hapus">
+                    <a href="'.route('master.sub-materi.index',$row->id_materi).'" class="btn btn-small btn-warning">Sub</a>
+                </div>
+            </form>
+            ';
+        })
+        ->rawColumns(['isi','action'])
+        ->addIndexColumn()
+        ->toJson();
+    }
+    function subMateri(DataTables $dataTables){
+        $idMateri = request()->query('id_materi');
+        $subMateri = SubMateri::whereIdMateri($idMateri);
+        return $dataTables->of($subMateri)
+        ->addColumn('action',function($row){
+            return '
+            <form action="'.route('master.sub-materi.destroy',[$row->id_materi,$row]).'" method="POST">
+                '.csrf_field().'
+                <div class="btn-group" role="group">
+                    <a href="'.route('master.sub-materi.edit',[$row->id_materi,$row]).'" class="btn btn-small btn-info">Ubah</a>
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="submit" class="btn btn-small btn-danger" value="Hapus">
                 </div>

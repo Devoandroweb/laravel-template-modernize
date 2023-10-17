@@ -10,6 +10,7 @@ use App\Http\Controllers\Master\CKelas;
 use App\Http\Controllers\Master\CLatihan;
 use App\Http\Controllers\Master\CMateri;
 use App\Http\Controllers\Master\CPermainan;
+use App\Http\Controllers\Master\CSubMateri;
 use App\Http\Controllers\Siswa\CHome;
 use App\Http\Controllers\Siswa\CLogin as SiswaCLogin;
 use App\Http\Controllers\Siswa\CMateri as SiswaMateri;
@@ -39,7 +40,11 @@ Route::middleware('auth')->group(function(){
     Route::prefix('/master')
     ->name('master.')
     ->group(function(){
+
         Route::resource('/materi',CMateri::class,['parameters' => ['materi' => 'mMateri']]);
+
+        Route::resource('materi/{id_materi}/sub-materi',CSubMateri::class,['parameters' => ['sub_materi' => 'subMateri']]);
+
         Route::resource('/latihan',CLatihan::class,['parameters' => ['latihan' => 'mLatihan']]);
         Route::get('/latihan-detail/{nomor}',[CLatihan::class,'detail'])->name('latihan.detail');
         Route::resource('/permainan',CPermainan::class);
@@ -61,6 +66,7 @@ Route::middleware('auth')->group(function(){
     ->name('datatable.')
     ->group(function(){
         Route::get('/materi',[CDatatable::class,'materi'])->name('materi');
+        Route::get('/sub-materi',[CDatatable::class,'subMateri'])->name('sub-materi');
         Route::get('/latihan',[CDatatable::class,'latihan'])->name('latihan');
         Route::get('/latihan-detail',[CDatatable::class,'latihanDetail'])->name('latihan.detail');
         Route::get('/permainan',[CDatatable::class,'permainan'])->name('permainan');
@@ -82,5 +88,6 @@ Route::middleware('auth:siswa')->group(function(){
             Route::get('/latihan/next/{nomor}',[SiswaLatihan::class,'next'])->name('latihan.next');
             Route::get('/latihan/thankyu',[SiswaLatihan::class,'thankyu'])->name('latihan.thankyu');
             Route::get('/materi-detail/{mmateri}',[SiswaMateri::class,'show'])->name('materi.detail');
+            Route::get('/materi-detail/{mmateri}/show-sub/{id_sub_materi}',[SiswaMateri::class,'showSub'])->name('materi.detail.sub');
         });
 });

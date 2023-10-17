@@ -12,6 +12,18 @@ function materiDT(){
     ];
     return $arrayColumns;
 }
+function subMateriDT(){
+    $arrayColumns = [
+        "url" => route("datatable.sub-materi"),
+        "column" => [
+            ['title' => 'No','data' => 'DT_RowIndex', 'orderable'=> false ,'searchable'=> false],
+            ['title' => 'Judul','data' => 'judul','name' => 'judul'],
+            ['title' => 'Isi','data' => 'isi','name' => 'isi'],
+            ['title' => 'Action','data' => 'action','name' => null,'orderable'=> false ,'searchable'=> false],
+        ]
+    ];
+    return $arrayColumns;
+}
 function latihanDT(){
     $arrayColumns = [
         "url" => route("datatable.latihan"),

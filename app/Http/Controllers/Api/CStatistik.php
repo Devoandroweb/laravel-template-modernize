@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\MMateri;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class CStatistik extends Controller
 {
     function penjualan(){
+
+        // $materi = MMateri::whereIdMateri(1)->with('subMateri')->first();
 
         // Tanggal awal
         $startDate = Carbon::create(2023, 11, 1); // Gantilah dengan tanggal awal yang Anda butuhkan
