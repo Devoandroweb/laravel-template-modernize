@@ -13,8 +13,8 @@
     <div class="row">
         <div class="col">
             @if($subMateri->isi)
-            <div class="border-dashed-purple mb-2">
-                <div class="wall-purple p-3">
+            <div class="border-dashed-pink mb-2">
+                <div class="wall-pink p-3">
                     {!! $subMateri->isi !!}
                 </div>
             </div>
