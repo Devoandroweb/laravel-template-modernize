@@ -21,11 +21,11 @@
             @endif
 
             @if($materi->subMateri)
-            
+
             @foreach ($materi->subMateri->get() as $row)
             <a href="{{route('client.materi.detail.sub',[$materi,$row])}}">
-                <div class="border-dashed-purple mb-2">
-                    <div class="wall-purple p-3">
+                <div class="border-dashed-pink mb-2">
+                    <div class="wall-pink p-3">
                         {!! $row->judul !!}
                     </div>
                 </div>
