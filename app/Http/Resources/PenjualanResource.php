@@ -16,7 +16,7 @@ class PenjualanResource extends JsonResource
     {
         return [
             "id_penjualan" => $this->id_penjualan,
-            "nama_barang" => $this->barang?->nama,
+            "nama_barang" => $this->barang?->nama ?? "-",
             "tanggal_penjualan" => convertDate($this->tanggal_penjualan,true,false),
             "jumlah_penjualan" => $this->jumlah_penjualan
         ];

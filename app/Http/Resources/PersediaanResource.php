@@ -16,8 +16,8 @@ class PersediaanResource extends JsonResource
     {
         return [
             "id_persediaan" => $this->id_persediaan,
-            "nama_barang" => $this->barang?->nama_barang,
-            "satuan" => $this->barang?->satuan,
+            "nama_barang" => $this->barang?->nama_barang ?? "-",
+            "satuan" => $this->barang?->satuan ?? "-",
             "jumlah_barang" => $this->jumlah_barang
         ];
     }

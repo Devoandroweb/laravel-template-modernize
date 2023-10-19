@@ -22,7 +22,7 @@ class CAuth extends Controller
 
             $user = Auth::guard('cris')->user();
             $authToken = $user->createToken('auth_token')->plainTextToken;
-            $data = ['status'=>TRUE,'message' => 'Berhasil Login', 'access_token' => $authToken, 'token_type' => 'Bearer'];
+            $data = ['status'=>TRUE,'message' => 'Berhasil Login', 'access_token' => $authToken, 'token_type' => 'Bearer','user'=>$user];
             return response()->json($data, 200);
         } catch (\Throwable $th) {
             return response()->json([
