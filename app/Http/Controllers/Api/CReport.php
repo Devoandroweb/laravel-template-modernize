@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\MMateri;
 use App\Repositories\ApiHandle\ApiHandleRepository;
 use App\Repositories\SystemEpic\SystemEpicRepository;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 
-class CStatistik extends Controller
+class CReport extends Controller
 {
+
     protected $systemEpicRepository;
     protected $apiHandleRepository;
     function __construct(
@@ -20,9 +19,11 @@ class CStatistik extends Controller
         $this->systemEpicRepository = $systemEpicRepository;
         $this->apiHandleRepository = $apiHandleRepository;
     }
-    function penjualan(){
+    function barang(){
         return $this->apiHandleRepository->safeApiCall(function(){
-             return responseSuccess($this->systemEpicRepository->getStatistic());
+            // dd($kode_barang);
+            $barang =  $this->systemEpicRepository->getReportPenjualan();
+            return responseSuccess($barang);
         });
     }
 }

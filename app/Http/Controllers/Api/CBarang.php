@@ -8,14 +8,20 @@ use App\Http\Resources\BarangResource;
 use App\Models\MBarang;
 use App\Models\Persediaan;
 use App\Repositories\ApiHandle\ApiHandleRepository;
+use App\Repositories\SystemEpic\SystemEpicRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CBarang extends Controller
 {
     protected $apiHandleRepository;
-    function __construct(ApiHandleRepository $apiHandleRepository){
+    protected $systemEpicRepository;
+    function __construct(
+        ApiHandleRepository $apiHandleRepository,
+        SystemEpicRepository $systemEpicRepository,
+        ){
         $this->apiHandleRepository = $apiHandleRepository;
+        $this->systemEpicRepository = $systemEpicRepository;
     }
     function list() {
         return $this->apiHandleRepository->safeApiCall(function(){
@@ -80,4 +86,5 @@ class CBarang extends Controller
             return responseSuccess($barang);
         });
     }
+    
 }

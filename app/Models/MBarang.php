@@ -17,4 +17,16 @@ class MBarang extends Model
     function persediaan(){
         return $this->hasOne(Persediaan::class,'id_barang');
     }
+    function persediaanMany(){
+        return $this->hasMany(Persediaan::class,'id_barang');
+    }
+    function penjualanMany(){
+        return $this->hasMany(Penjualan::class,'id_barang');
+    }
+    function pengembalianMany(){
+        return $this->hasMany(PengembalianBarang::class,'id_barang');
+    }
+    function salesMany(){
+        return $this->hasMany(Sales::class,'id_barang');
+    }
 }

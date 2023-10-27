@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\CKategori;
 use App\Http\Controllers\Api\CPengembalianBarang;
 use App\Http\Controllers\Api\CPenjualan;
 use App\Http\Controllers\Api\CPersediaan;
+use App\Http\Controllers\Api\CReport;
 use App\Http\Controllers\Api\CSales;
 use App\Http\Controllers\Api\CStatistik;
 use App\Http\Controllers\Api\CUser;
@@ -101,6 +102,12 @@ Route::middleware('auth:sanctum')->group(function(){
     ->controller(CStatistik::class)
     ->group(function(){
         Route::get('penjualan', 'penjualan')->name('penjualan');
+    });
+    Route::prefix('report')
+    ->name('report.')
+    ->controller(CReport::class)
+    ->group(function(){
+        Route::get('barang', 'barang')->name('barang');
     });
 });
 

@@ -2,8 +2,10 @@
 
 namespace App\Repositories\SystemEpic;
 
+use App\Models\MBarang;
 use App\Models\PengembalianBarang;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Carbon;
 use LaravelEasyRepository\Implementations\Eloquent;
 use App\Models\SystemEpic;
 use App\Models\Penjualan;
@@ -94,5 +96,62 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
             return 1;
         }
         return 0;
+    }
+    function getStatistic(){
+        $month = request('month');
+        $year = request('year');
+         // $materi = MMateri::whereIdMateri(1)->with('subMateri')->first();
+
+        // Tanggal awal
+        $startDate = Carbon::create($year, $month, 1); // Gantilah dengan tanggal awal yang Anda butuhkan
+
+        // Tanggal akhir, misalnya sampai minggu ke-4
+        $endDate = $startDate->copy()->addWeeks(3); // 3 minggu setelah tanggal awal
+
+        // Array untuk menyimpan tanggal-tanggal setiap minggu
+        $weeklyDates = [];
+
+        $dateMonth = Carbon::create($year, $month, 1);
+
+        // Hitung jumlah hari dalam bulan
+        $countDayInMonth = $dateMonth->daysInMonth;
+
+        // Loop untuk mengambil tanggal setiap minggu
+        while ($startDate->lte($endDate)) {
+            $weeklyDates[] = $startDate->toDateString();
+            $startDate->addWeek(); // Geser ke minggu berikutnya
+        }
+        $result = [];
+        // Cetak hasil
+        foreach ($weeklyDates as $i => $date) {
+            // dd($i);
+
+            $dateSparated = explode("-",$date);
+            $dateCreate = Carbon::create($dateSparated[0],$dateSparated[1],$dateSparated[2]);
+            $week = [$date,$dateCreate->addDays(6)->toDateString()];
+
+            $result[] = Penjualan::whereBetween('tanggal_penjualan',$week)->get()->count();
+
+        }
+        if(($countDayInMonth-28) > 0){
+            $result[] = Penjualan::whereBetween('tanggal_penjualan',["{$year}-{$month}-29","{$year}-{$month}-31"])->get()->count();
+        }
+        return $result;
+    }
+    function getReportPenjualan(){
+        $barang = MBarang::all();
+        $result = [];
+        foreach($barang as $b){
+            $result[] = [
+                'kode_barang'=>$b->kode_barang,
+                'nama_barang'=>$b->nama_barang,
+                'sales' => $b->salesMany()->count(),
+                'penjualan' => $b->penjualanMany()->count(),
+                'pengembalian' => $b->pengembalianMany()->count(),
+                'persediaan' => $b->persediaanMany()->count(),
+            ];
+        }
+        return $result;
+
     }
 }
