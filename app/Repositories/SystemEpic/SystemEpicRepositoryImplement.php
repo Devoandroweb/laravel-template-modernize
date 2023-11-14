@@ -65,7 +65,7 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         $persediaan = $this->persediaan->whereIdBarang($idBarang)->first();
 
         if($persediaan){
-            $persediaan->jumlah_barang += (int)$credentials['jumlah_barang'];
+            $persediaan->jumlah_barang -= (int)$credentials['jumlah_barang'];
             $this->pengembalianBarang->create($credentials);
             $persediaan->update();
             return true;
