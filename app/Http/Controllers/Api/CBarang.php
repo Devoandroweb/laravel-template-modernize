@@ -50,7 +50,7 @@ class CBarang extends Controller
         return $this->apiHandleRepository->safeApiCall(function(){
             // dd($kode_barang);
             $barang = MBarang::find(request('id_barang'));
-            $barang = BarangResource::collection($barang);
+            $barang = BarangResource::make($barang);
             return responseSuccess($barang);
         });
     }
