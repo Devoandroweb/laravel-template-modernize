@@ -49,7 +49,7 @@ class CBarang extends Controller
     function edit(){
         return $this->apiHandleRepository->safeApiCall(function(){
             // dd($kode_barang);
-            $barang = MBarang::find(request('id_barang'));
+            $barang = MBarang::whereIdBarang(request('id_barang'))->first();
             $barang = BarangResource::make($barang);
             return responseSuccess($barang);
         });
