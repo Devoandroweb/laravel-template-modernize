@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PersediaanByKategoriResource;
 use App\Http\Resources\PersediaanResource;
+use App\Http\Resources\BarangResource;
 use App\Models\MBarang;
 use App\Models\MKategori;
 use App\Models\Persediaan;
