@@ -21,6 +21,7 @@ class BarangResource extends JsonResource
             "satuan"=>$this->satuan,
             "nama_kategori"=>$this->kategori?->nama_kategori ?? "-",
             "minimal_persediaan"=>$this->minimal_persediaan,
+            "persediaan"=>$this->persediaan->jumlah_barang ?? 0,
         ];
     }
 }

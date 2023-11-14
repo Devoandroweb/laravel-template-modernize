@@ -19,10 +19,12 @@ class CPersediaan extends Controller
     }
     function listByKategory($id_kategori) {
         return $this->apiHandleRepository->safeApiCall(function()use($id_kategori){
-            $kategori = MKategori::whereIdKategori($id_kategori)->get();
-            $persediaan = PersediaanByKategoriResource::collection($kategori);
+            // $kategori = MKategori::whereIdKategori($id_kategori)->get();
+            // $persediaan = PersediaanByKategoriResource::collection($kategori);
             // dd($kategori);
-            return responseSuccess($persediaan);
+            $barang = MBarang::whereIdKategori($id_kategori)->get();
+            $barang = BarangResource::collection($barang);
+            return responseSuccess($barang);
         });
     }
     function list() {
