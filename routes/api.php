@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->group(function(){
     ->group(function(){
         Route::get('list', 'list')->name('list');
         Route::post('update', 'update')->name('update');
-        Route::get('edit', 'edit')->name('edit');
+        Route::post('edit', 'edit')->name('edit');
         Route::post('create', 'create')->name('create');
         Route::post('delete', 'delete')->name('delete');
         Route::get('list-by-kategori/{id_kategori}', 'getBarangWithKategori');
