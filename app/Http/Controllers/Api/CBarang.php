@@ -47,7 +47,7 @@ class CBarang extends Controller
 
     }
     function edit(){
-        return $this->apiHandleRepository->safeApiCall(function()use($id_kategori){
+        return $this->apiHandleRepository->safeApiCall(function(){
             // dd($kode_barang);
             $barang = MBarang::find(request('id_barang'))->get();
             $barang = BarangResource::collection($barang);
