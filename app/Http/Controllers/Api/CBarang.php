@@ -46,6 +46,14 @@ class CBarang extends Controller
         });
 
     }
+    function edit(BarangRequest $barangRequest){
+        return $this->apiHandleRepository->safeApiCall(function()use($id_kategori){
+            // dd($kode_barang);
+            $barang = MBarang::find(request('id_barang'))->get();
+            $barang = BarangResource::collection($barang);
+            return responseSuccess($barang);
+        });
+    }
     function update(BarangRequest $barangRequest) {
         return $this->apiHandleRepository->safeApiCall(function() use ($barangRequest){
             $credentials = $barangRequest->validated();
