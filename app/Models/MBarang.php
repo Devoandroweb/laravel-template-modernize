@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Repositories\SystemEpicRepository;
 class MBarang extends Model
 {
     use HasFactory;
     protected $table = 'barang';
     protected $primaryKey = 'id_barang';
     protected $fillable = ['kode_barang','nama_barang', 'satuan', 'id_kategori', 'minimal_persediaan'];
-    protected $systemEpicRepository;
+    // protected $systemEpicRepository;
     
     function kategori(){
         return $this->hasOne(MKategori::class,'id_kategori','id_kategori');
