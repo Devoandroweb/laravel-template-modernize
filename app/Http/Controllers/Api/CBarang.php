@@ -27,8 +27,8 @@ class CBarang extends Controller
     function list() {
         
         return $this->apiHandleRepository->safeApiCall(function(){
-            $barang = MBarang::all();
-            $barang = BarangResource::collection($barang);
+            $barang = MKategori::all();
+            // $barang = BarangResource::collection($barang);
             return responseSuccess($barang);
         });
     }
