@@ -2,16 +2,17 @@
 namespace App\Traits;
 
 use App\Models\UserEpic;
+use Laravel\Passport\PersonalAccessToken;
+
 trait CreatedBy
 {
     protected static function boot()
     {
-        
-        $user = UserEpic::token()->get();
-        dd($user);
+        $idUser = PersonalAccessToken::where('auth_token',request()->header('Authorization'))->first()->value('tokenable_id');
+        echo $idUser;
         parent::boot();
-        static::addGlobalScope('created_by', function ($builder) {
-            $builder->where('created_by', Auth::guard('cris')->user()?->id_user);
+        static::addGlobalScope('created_by', function ($builder) use ($idUser) {
+            $builder->where('created_by', $idUser);
         });
     }
 }
