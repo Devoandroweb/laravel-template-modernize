@@ -25,10 +25,10 @@ class CBarang extends Controller
         $this->systemEpicRepository = $systemEpicRepository;
     }
     function list() {
-        
+        dd(request()->user());
         return $this->apiHandleRepository->safeApiCall(function(){
-            $barang = MKategori::all();
-            // $barang = BarangResource::collection($barang);
+            $barang = MBarang::all();
+            $barang = BarangResource::collection($barang);
             return responseSuccess($barang);
         });
     }
