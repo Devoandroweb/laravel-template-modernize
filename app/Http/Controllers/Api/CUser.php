@@ -50,7 +50,7 @@ class CUser extends Controller
     }
     function profile($id_user) {
         return $this->apiHandleRepository->safeApiCall(function()use($id_user){
-            $user = UserEpic::find($id_user);
+            $user = UserEpic::findByApiToken();
             $user = UserEpicResource::make($user);
             return responseSuccess($user);
         });
