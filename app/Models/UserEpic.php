@@ -14,12 +14,5 @@ class UserEpic extends Authenticatable
     protected $table = 'user';
     protected $primaryKey = 'id_user';
     protected $fillable = ['nama', 'email', 'nama_toko','role', 'username', 'password','foto','token'];
-    public static function findByApiToken()
-    {
-        $apiToken = request()->header('Authorization');
-        // Lakukan pencarian pengguna berdasarkan token API
-        return static::all()->filter(function ($user) use ($apiToken) {
-            return $user->generateApiToken() === $apiToken;
-        })->first();
-    }
+    
 }

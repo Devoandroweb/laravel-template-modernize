@@ -25,7 +25,7 @@ class CBarang extends Controller
         $this->systemEpicRepository = $systemEpicRepository;
     }
     function list() {
-        dd(Auth::guard('cris')->check());
+        
         return $this->apiHandleRepository->safeApiCall(function(){
             $barang = MBarang::all();
             $barang = BarangResource::collection($barang);
