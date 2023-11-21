@@ -30,7 +30,7 @@ class ApiHandleRepositoryImplement extends Eloquent implements ApiHandleReposito
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            return responseFailed($th->getMessage());
+            return responseFailed($th->getMessage()."|".$th->getFile());
         }
     }
 }
