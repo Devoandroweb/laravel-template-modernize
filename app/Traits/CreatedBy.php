@@ -8,7 +8,7 @@ trait CreatedBy
 {
     protected static function boot()
     {
-        $idUser = PersonalAccessToken::where('auth_token',request()->header('Authorization'))->first()->value('tokenable_id');
+        $idUser = PersonalAccessToken::where('token',request()->header('Authorization'))->first()->value('tokenable_id');
         echo $idUser;
         parent::boot();
         static::addGlobalScope('created_by', function ($builder) use ($idUser) {
