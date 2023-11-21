@@ -13,5 +13,5 @@ class UserEpic extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'user';
     protected $primaryKey = 'id_user';
-    protected $fillable = ['nama', 'email', 'nama_toko','role', 'username', 'password','foto'];
+    protected $fillable = ['nama', 'email', 'nama_toko','role', 'username', 'password','foto','token'];
 }
