@@ -2,7 +2,7 @@
 namespace App\Traits;
 
 use App\Models\UserEpic;
-use Laravel\Passport\PersonalAccessToken;
+use Laravel\Sanctum\PersonalAccessToken;
 
 trait CreatedBy
 {
