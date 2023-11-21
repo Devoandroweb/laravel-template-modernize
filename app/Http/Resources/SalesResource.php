@@ -16,7 +16,7 @@ class SalesResource extends JsonResource
     {
         return [
             "id_sales" => $this->id_sales,
-            "nama_barang" => $this->barang?->nama_barang ?? "-",
+            "nama_barang" => $this->barang?->nama_barang ?? "- Barang sudah di hapus -",
             "satuan"=> $this->barang?->satuan ?? "-",
             "jumlah_sales" => $this->jumlah_sales,
             "tanggal_sales" => convertDate($this->created_at,true,false)
