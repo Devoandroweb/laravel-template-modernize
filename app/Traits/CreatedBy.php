@@ -8,15 +8,9 @@ trait CreatedBy
 {
     protected static function boot()
     {
-        dd(request()->user());
-        $token = request()->header('Authorization');
-        $token = explode(" ",$token);
-        $token = explode("|",$token[1]);
-        $accessToken = PersonalAccessToken::where('token',$token[1])->first();
-        dd(request()->header('Authorization'),$accessToken?->tokenable_id);
         parent::boot();
-        static::addGlobalScope('created_by', function ($builder) use ($accessToken) {
-            $builder->where('created_by', $accessToken->tokenable_id);
+        static::addGlobalScope('created_by', function ($builder){
+            $builder->where('created_by', request()->user()->id_user);
         });
     }
 }
