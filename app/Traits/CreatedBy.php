@@ -1,5 +1,6 @@
 <?php
 namespace App\Traits;
+use Illuminate\Support\Facades\Auth;
 
 trait CreatedBy
 {
@@ -7,7 +8,7 @@ trait CreatedBy
     {
         parent::boot();
         static::addGlobalScope('created_by', function ($builder) {
-            $builder->where('created_by', auth()->guard('cris')->user()->id_user);
+            $builder->where('created_by', Auth::guard('cris')->user()->id_user);
         });
     }
 }
