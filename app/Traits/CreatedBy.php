@@ -8,6 +8,7 @@ trait CreatedBy
 {
     protected static function boot()
     {
+        dd(request()->user());
         parent::boot();
         if(request()->user()->role != 1){
             static::addGlobalScope('created_by', function ($builder){
