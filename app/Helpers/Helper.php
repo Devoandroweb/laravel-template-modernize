@@ -84,10 +84,3 @@ function convertDate($date, $withDay = true, $withMinute = true)
     }
     return $text;
 }
-function whereCreatedBy(){
-
-    // Menetapkan kondisi default where untuk post yang di-publish
-    static::addGlobalScope('created_by', function ($builder) {
-        $builder->where('created_by', Auth::user()->id);
-    });
-}

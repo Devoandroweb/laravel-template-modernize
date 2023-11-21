@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 class MBarang extends Model
 {
-    use HasFactory;
+    use HasFactory,CreatedBy;
     protected $table = 'barang';
     protected $primaryKey = 'id_barang';
     protected $fillable = ['kode_barang','nama_barang', 'satuan', 'id_kategori', 'minimal_persediaan'];
@@ -30,10 +30,4 @@ class MBarang extends Model
         return $this->hasMany(Sales::class,'id_barang');
     }
 
-    # DEFAULT FUNCTION #
-    protected static function boot()
-    {
-        parent::boot();
-        whereCreatedBy();
-    }
 }
