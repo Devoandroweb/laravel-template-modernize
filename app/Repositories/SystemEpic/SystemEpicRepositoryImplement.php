@@ -139,7 +139,7 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         return $result;
     }
     function getReportPenjualan(){
-        $barang = MBarang::all();
+        $barang = MBarang::whereUser();
         $result = [];
         foreach($barang as $b){
             $result[] = [
@@ -153,5 +153,5 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         }
         return $result;
     }
-    
+
 }

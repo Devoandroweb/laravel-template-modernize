@@ -1,2 +1,0 @@
-ALTER TABLE `user` ADD `foto` TEXT NULL DEFAULT NULL AFTER `password`;
-ALTER TABLE `user` ADD `nama` VARCHAR(200) NOT NULL AFTER `id_user`, ADD `email` INT(50) NULL DEFAULT NULL AFTER `nama`, ADD `nama_toko` INT(225) NOT NULL AFTER `email`;

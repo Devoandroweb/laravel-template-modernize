@@ -14,5 +14,6 @@ class UserEpic extends Authenticatable
     protected $table = 'user';
     protected $primaryKey = 'id_user';
     protected $fillable = ['nama', 'email', 'nama_toko','role', 'username', 'password','foto','token'];
+
     
 }

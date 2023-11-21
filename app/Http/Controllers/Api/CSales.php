@@ -36,7 +36,7 @@ class CSales extends Controller
     }
     function list() {
         return $this->apiHandleRepository->safeApiCall(function(){
-            $sales = Sales::all();
+            $sales = Sales::whereUser();
             $sales = SalesResource::collection($sales);
             return responseSuccess($sales);
         });

@@ -6,14 +6,14 @@ use Laravel\Sanctum\PersonalAccessToken;
 
 trait CreatedBy
 {
-    protected static function boot()
-    {
-        dd(request()->user());
-        parent::boot();
-        if(request()->user()->role != 1){
-            static::addGlobalScope('created_by', function ($builder){
-                $builder->where('created_by', request()->user()->id_user);
-            });
+    static function whereUser(){
+        if(request()->user()->role == 1){
+            return parent::all();
+        }else{
+            return parent::where('created_by',request()->user()?->id_user)->get();
         }
+    }
+    static function whereCreatedBy(){
+        return parent::where('created_by',request()->user()?->id_user);
     }
 }

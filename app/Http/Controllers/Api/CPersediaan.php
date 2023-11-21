@@ -30,7 +30,7 @@ class CPersediaan extends Controller
     }
     function list() {
         return $this->apiHandleRepository->safeApiCall(function(){
-            $persediaan = Persediaan::all();
+            $persediaan = Persediaan::whereUser();
             $persediaan = PersediaanResource::collection($persediaan);
             return responseSuccess($persediaan);
         });
