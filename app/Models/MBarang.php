@@ -37,6 +37,6 @@ class MBarang extends Model
     # DEFAULT FUNCTION #
     protected static function boot()
     {
-        parent::$systemEpicRepository->whereCreatedBy();
+        SystemEpicRepository::whereCreatedBy();
     }
 }
