@@ -6,9 +6,10 @@ trait CreatedBy
 {
     protected static function boot()
     {
+        dd(Auth::guard('cris')->user());
         parent::boot();
         static::addGlobalScope('created_by', function ($builder) {
-            $builder->where('created_by', Auth::guard('cris')->user()->id_user);
+            $builder->where('created_by', Auth::guard('cris')->user()?->id_user);
         });
     }
 }
