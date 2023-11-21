@@ -1,7 +1,7 @@
 <?php
 namespace App\Traits;
 
-
+use App\Models\UserEpic;
 trait CreatedBy
 {
     protected static function boot()
