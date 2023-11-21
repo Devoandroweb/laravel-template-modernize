@@ -152,6 +152,13 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
             ];
         }
         return $result;
+    }
+    function whereCreatedBy(){
+        parent::boot();
 
+        // Menetapkan kondisi default where untuk post yang di-publish
+        static::addGlobalScope('created_by', function ($builder) {
+            $builder->where('created_by', Auth::user()->id);
+        });
     }
 }

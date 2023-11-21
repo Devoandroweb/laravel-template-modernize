@@ -11,6 +11,10 @@ class MBarang extends Model
     protected $table = 'barang';
     protected $primaryKey = 'id_barang';
     protected $fillable = ['kode_barang','nama_barang', 'satuan', 'id_kategori', 'minimal_persediaan'];
+    protected $systemEpicRepository;
+    function __construct(SystemEpicRepository $systemEpicRepository) {
+        $this->systemEpicRepository = $systemEpicRepository;
+    }
     function kategori(){
         return $this->hasOne(MKategori::class,'id_kategori','id_kategori');
     }
@@ -28,5 +32,11 @@ class MBarang extends Model
     }
     function salesMany(){
         return $this->hasMany(Sales::class,'id_barang');
+    }
+
+    # DEFAULT FUNCTION #
+    protected static function boot()
+    {
+        parent::$systemEpicRepository->whereCreatedBy();
     }
 }
