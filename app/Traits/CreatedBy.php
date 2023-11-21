@@ -8,6 +8,7 @@ trait CreatedBy
 {
     protected static function boot()
     {
+        dd(request()->user());
         $token = request()->header('Authorization');
         $token = explode(" ",$token);
         $token = explode("|",$token[1]);
