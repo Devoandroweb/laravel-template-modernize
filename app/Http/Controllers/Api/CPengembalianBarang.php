@@ -42,7 +42,7 @@ class CPengembalianBarang extends Controller
     }
     function delete() {
         return $this->apiHandleRepository->safeApiCall(function(){
-            PengembalianBarang::whereUser()->where('id_data_pengembalian_barang',request()->id_data_pengembalian_barang)->delete();
+            PengembalianBarang::where('id_data_pengembalian_barang',request()->id_data_pengembalian_barang)->delete();
             return responseSuccess($pengembalian);
         });
     }
