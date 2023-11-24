@@ -73,6 +73,7 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('list', 'list')->name('list');
         Route::post('create', 'create')->name('create');
         Route::post('edit', 'edit')->name('edit');
+        Route::post('delete', 'delete')->name('delete');
     });
     Route::prefix('user')
     ->name('user.')
