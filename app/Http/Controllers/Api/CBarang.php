@@ -27,7 +27,7 @@ class CBarang extends Controller
     function list() {
 
         return $this->apiHandleRepository->safeApiCall(function(){
-            $barang = MBarang::whereUser();
+            $barang = MBarang::whereUser()->get();
             $barang = BarangResource::collection($barang);
             return responseSuccess($barang);
         });
@@ -92,7 +92,7 @@ class CBarang extends Controller
         return $this->apiHandleRepository->safeApiCall(function(){
             // dd($kode_barang);
             $q = request()->query('q');
-            $barang = MBarang::where("nama_barang","like","%".$q."%")->whereUser();
+            $barang = MBarang::where("nama_barang","like","%".$q."%")->whereUser()->get();
             $barang = BarangResource::collection($barang);
             return responseSuccess($barang);
         });
