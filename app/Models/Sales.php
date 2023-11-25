@@ -16,10 +16,10 @@ class Sales extends Model
         return $this->hasOne(MBarang::class,'id_barang','id_barang');
     }
     static function whereUser(){
+        dd("asdasd");
         if(request()->user()->role != 1){
             return self::where('created_by',request()->user()?->id_user)->get();
         }
-        dd("asdasd");
         return self;
     }
 }
