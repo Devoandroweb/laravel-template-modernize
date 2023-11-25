@@ -145,7 +145,7 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
             $result[] = [
                 'kode_barang'=>$b->kode_barang,
                 'nama_barang'=>$b->nama_barang,
-                'sales' => $b->salesMany()->count(),
+                'sales' => $b->salesMany()->sum("jumlah_sales"),
                 'penjualan' => $b->penjualanMany()->count(),
                 'pengembalian' => $b->pengembalianMany()->count(),
                 'persediaan' => $b->persediaanMany()->count(),
