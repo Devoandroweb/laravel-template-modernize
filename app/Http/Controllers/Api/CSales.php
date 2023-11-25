@@ -36,7 +36,7 @@ class CSales extends Controller
     }
     function list() {
         return $this->apiHandleRepository->safeApiCall(function(){
-            $sales = Sales::whereUser();
+            $sales = Sales::whereHas('barang')->whereUser();
             $sales = SalesResource::collection($sales);
             return responseSuccess($sales);
         });
@@ -44,11 +44,11 @@ class CSales extends Controller
     function delete($id_sales){
         return $this->apiHandleRepository->safeApiCall(function() use ($id_sales){
             if($this->systemEpicRepository->reduceSalesAndStock($id_sales) == 1){
-                return responseSuccess(['message'=>'Sukses Mengahapus Sales']);
+                return responseSuccess(['message'=>'Sukses Mengahpus Sales']);
             }elseif($this->systemEpicRepository->reduceSalesAndStock($id_sales) == 0){
-                return responseFailed('ID Sales tidak ditemukan');
+                return responseSuccess(['message'=>'ID Sales tidak di temukan']);
             }else{
-                return responseFailed("Jumlah Persediaan tidak mencukupi");
+                return responseSuccess(['message'=>'Jumlah persediaan tidak mencukupi']);
             };
         });
     }
