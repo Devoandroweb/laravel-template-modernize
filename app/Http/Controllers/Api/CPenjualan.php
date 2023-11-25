@@ -33,7 +33,7 @@ class CPenjualan extends Controller
     }
     function list() {
         return $this->apiHandleRepository->safeApiCall(function(){
-            $penjualan = Penjualan::whereUser();
+            $penjualan = Penjualan::whereUser()->get();
             $penjualan = PenjualanResource::collection($penjualan);
             return responseSuccess($penjualan);
         });

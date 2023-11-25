@@ -17,7 +17,7 @@ class CUser extends Controller
         $this->apiHandleRepository = $apiHandleRepository;
     }
     function list() {
-        dd(auth('cris')->user()->currentAccessToken());
+        // dd(auth('cris')->user()->currentAccessToken());
         return $this->apiHandleRepository->safeApiCall(function(){
             $user = UserEpic::all();
             $user = UserEpicResource::collection($user);

@@ -16,7 +16,7 @@ class CKategori extends Controller
     }
     function list() {
         return $this->apiHandleRepository->safeApiCall(function(){
-            $barang = MKategori::whereUser();
+            $barang = MKategori::whereUser()->get();
             return responseSuccess($barang);
         });
     }
