@@ -36,7 +36,7 @@ class CSales extends Controller
     }
     function list() {
         return $this->apiHandleRepository->safeApiCall(function(){
-            $sales = Sales::whereHas('barang')->whereUser();
+            $sales = Sales::whereUser()->whereHas('barang');
             $sales = SalesResource::collection($sales);
             return responseSuccess($sales);
         });
