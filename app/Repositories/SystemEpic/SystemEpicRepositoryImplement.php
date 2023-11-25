@@ -141,7 +141,8 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
     function getReportPenjualan(){
         $barang = MBarang::whereUser()->get();
         $result = [];
-        $dateLastMoth = date("Y-m",strtotime("-1 Month"));
+        $dateLastMoth = date("Y-m",strtotime("-1 month"));
+        dd($dateLastMoth);
         foreach($barang as $b){
             $result[] = [
                 'kode_barang'=>$b->kode_barang,
