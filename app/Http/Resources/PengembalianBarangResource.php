@@ -17,6 +17,7 @@ class PengembalianBarangResource extends JsonResource
         return [
             "id_data_pengembalian_barang" => $this->id_data_pengembalian_barang,
             "nama_barang" => $this->barang?->nama_barang ?? "- Barang sudah di hapus -",
+            "kode_barang" => $this->barang?->kode_barang ?? "- Barang sudah di hapus -",
             "satuan" => $this->barang?->satuan ?? "-",
             "jumlah_barang" => $this->jumlah_barang,
             "tanggal_pengembalian" => convertDate($this->tanggal_pengembalian,true,false),
