@@ -33,6 +33,11 @@ class UserEpicRequest extends FormRequest
             'role'=>'required',
             'username'=>'required',
             'password'=>'required',
+            'alamat'=>'required',
+            'ttl'=>'required',
+            'tempat_lahir'=>'required',
+            'jk'=>'required',
+            'no_tlp'=>'required'
         ];
         if(is_null($this->id_user)){
             $dataValidate['username'] = 'unique:user,username|required';
@@ -63,7 +68,12 @@ class UserEpicRequest extends FormRequest
             'nama_toko.required' => 'Nama Toko tidak boleh kosong',
             'nama.required' => 'Nama Pengguna tidak boleh kosong',
             'role.required' => 'Role tidak boleh kosong',
-            'password.required' => 'Password tidak boleh kosong'
+            'password.required' => 'Password tidak boleh kosong',
+            'alamat'=>'Alamat tidak boleh kosong',
+            'ttl'=>'Tanggal Lahir tidak boleh kosong',
+            'tempat_lahir'=>'Tempat Lahir tidak boleh kosong',
+            'jk'=>'Jenis Kelamin tidak boleh kosong',
+            'no_tlp'=>'No Telepon tidak boleh kosong'
         ];
 
     }
