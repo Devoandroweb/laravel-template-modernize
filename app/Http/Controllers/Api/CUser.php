@@ -82,11 +82,11 @@ class CUser extends Controller
     function home(){
         
         return $this->apiHandleRepository->safeApiCall(function(){
-        $date = request()->date;
-        $sales = Sales::whereUser()->whereBetween('created_at',["1-".$date,"31-".$date])->get()->count();
-        $penjualan = Penjualan::whereUser()->whereBetween('created_at',["1-".$date,"31-".$date])->get()->count();
-        $pengembalian = PengembalianBarang::whereUser()->whereBetween('created_at',["1-".$date,"31-".$date])->get()->count();
-        $persediaan = Perseidaan::whereUser()->whereBetween('created_at',["1-".$date,"31-".$date])->get()->count();
+            $date = request()->date;
+            $sales = Sales::whereUser()->whereBetween('created_at',["1-".$date,"31-".$date])->get()->count();
+            $penjualan = Penjualan::whereUser()->whereBetween('created_at',["1-".$date,"31-".$date])->get()->count();
+            $pengembalian = PengembalianBarang::whereUser()->whereBetween('created_at',["1-".$date,"31-".$date])->get()->count();
+            $persediaan = Perseidaan::whereUser()->whereBetween('created_at',["1-".$date,"31-".$date])->get()->count();
             return responseSuccess(compact("sales","penjualan","pengembalian","persediaan"));
         });
     }
