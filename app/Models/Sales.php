@@ -19,6 +19,7 @@ class Sales extends Model
         if(request()->user()->role != 1){
             return self::where('created_by',request()->user()?->id_user)->get();
         }
+        dd("asdasd");
         return self;
     }
 }
