@@ -72,10 +72,9 @@ class CBarang extends Controller
     function delete(){
         return $this->apiHandleRepository->safeApiCall(function(){
             $kode_barang = request('kode_barang');
-            // dd($kode_barang);
-
-            MBarang::whereKodeBarang($kode_barang)->delete();
-            Persediaan::whereKodeBarang($kode_barang)->delete();
+            $barang = MBarang::whereKodeBarang($kode_barang)->first();
+            $barang->delete();
+            Persediaan::whereIdBarang($barang?->id_barang)->delete();
 
             return responseSuccess(['message'=>'Sukses Menghapus Barang']);
         });
