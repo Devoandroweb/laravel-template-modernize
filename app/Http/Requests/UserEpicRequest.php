@@ -27,7 +27,7 @@ class UserEpicRequest extends FormRequest
     {
         $dataValidate = [
             'id_user'=>'nullable',
-            'nama_toko'=>'requred',
+            'nama_toko'=>'required',
             'nama'=>'required',
             'email'=>'nullable',
             'role'=>'required',
