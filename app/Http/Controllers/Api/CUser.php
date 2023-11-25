@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\UserEpicRequest;
 use App\Http\Resources\UserEpicResource;
+use App\Models\PengembalianBarang;
+use App\Models\Penjualan;
+use App\Models\Persediaan;
+use App\Models\Sales;
 use App\Models\UserEpic;
 use App\Repositories\ApiHandle\ApiHandleRepository;
 use Illuminate\Http\Request;
@@ -87,7 +91,7 @@ class CUser extends Controller
             $sales = Sales::whereUser()->whereBetween('created_at',$wherDate)->get()->count();
             $penjualan = Penjualan::whereUser()->whereBetween('created_at',$wherDate)->get()->count();
             $pengembalian = PengembalianBarang::whereUser()->whereBetween('created_at',$wherDate)->get()->count();
-            $persediaan = Perseidaan::whereUser()->whereBetween('created_at',$wherDate)->get()->count();
+            $persediaan = Persediaan::whereUser()->whereBetween('created_at',$wherDate)->get()->count();
             return responseSuccess(compact("sales","penjualan","pengembalian","persediaan"));
         });
     }
