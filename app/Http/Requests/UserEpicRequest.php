@@ -52,8 +52,10 @@ class UserEpicRequest extends FormRequest
         $keys = Schema::getColumnListing('user');
 
         foreach ($keys as $key) {
-            if(isset($errorMessages[$key])){
-                $errors[$key] = collect($errorMessages[$key])->first();
+            if($key != 'foto'){
+                if(isset($errorMessages[$key])){
+                    $errors[$key] = collect($errorMessages[$key])->first();
+                }
             }
             // Menggunakan nama bidang sebagai kunci dan pesan kesalahan sebagai nilai
         }
@@ -69,11 +71,11 @@ class UserEpicRequest extends FormRequest
             'nama.required' => 'Nama Pengguna tidak boleh kosong',
             'role.required' => 'Role tidak boleh kosong',
             'password.required' => 'Password tidak boleh kosong',
-            'alamat'=>'Alamat tidak boleh kosong',
-            'ttl'=>'Tanggal Lahir tidak boleh kosong',
-            'tempat_lahir'=>'Tempat Lahir tidak boleh kosong',
-            'jk'=>'Jenis Kelamin tidak boleh kosong',
-            'no_tlp'=>'No Telepon tidak boleh kosong'
+            'alamat.required'=>'Alamat tidak boleh kosong',
+            'ttl.required'=>'Tanggal Lahir tidak boleh kosong',
+            'tempat_lahir.required'=>'Tempat Lahir tidak boleh kosong',
+            'jk.required'=>'Jenis Kelamin tidak boleh kosong',
+            'no_tlp.required'=>'No Telepon tidak boleh kosong'
         ];
 
     }
