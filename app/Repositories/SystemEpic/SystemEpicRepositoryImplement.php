@@ -139,7 +139,7 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         return $result;
     }
     function getReportPenjualan(){
-        $barang = MBarang::whereUser();
+        $barang = MBarang::whereUser()->get();
         $result = [];
         foreach($barang as $b){
             $result[] = [
