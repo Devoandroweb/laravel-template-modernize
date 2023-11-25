@@ -13,6 +13,6 @@ class PengembalianBarang extends Model
     protected $primaryKey = 'id_data_pengembalian_barang';
     protected $fillable = ['id_barang', 'jumlah_barang', 'tanggal_pengembalian'];
     function barang(){
-        return $this->hasOne(MBarang::class,'id_barang');
+        return $this->hasOne(MBarang::class,'id_barang','id_barang');
     }
 }
