@@ -141,16 +141,18 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
     function getReportPenjualan(){
         $barang = MBarang::whereUser()->get();
         $result = [];
-        $dateLastMoth = date("Y-m",strtotime("-1 month"));
+        $dateLastMothS = date("Y-m-1",strtotime("-1 month"));
+        $dateLastMothE = date("Y-m-31",strtotime("-1 month"));
+        $whereDate = [$dateLastMothS,$dateLastMothE];
         // dd($dateLastMoth);
         foreach($barang as $b){
             $result[] = [
                 'kode_barang'=>$b->kode_barang,
                 'nama_barang'=>$b->nama_barang,
-                'sales' => $b->salesMany()->whereDate('created_at',$dateLastMoth)->sum("jumlah_sales"),
-                'penjualan' => $b->penjualanMany()->whereDate('created_at',$dateLastMoth)->sum("jumlah_penjualan"),
-                'pengembalian' => $b->pengembalianMany()->whereDate('created_at',$dateLastMoth)->sum("jumlah_barang"),
-                'persediaan' => $b->persediaanMany()->whereDate('created_at',$dateLastMoth)->sum("jumlah_barang"),
+                'sales' => $b->salesMany()->whereBetween('created_at',$whereDate)->sum("jumlah_sales"),
+                'penjualan' => $b->penjualanMany()->whereBetween('created_at',$whereDate)->sum("jumlah_penjualan"),
+                'pengembalian' => $b->pengembalianMany()->whereBetween('created_at',$whereDate)->sum("jumlah_barang"),
+                'persediaan' => $b->persediaanMany()->whereBetween('created_at',$whereDate)->sum("jumlah_barang"),
             ];
         }
         return $result;
