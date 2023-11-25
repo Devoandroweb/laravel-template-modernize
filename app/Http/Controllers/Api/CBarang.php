@@ -82,7 +82,7 @@ class CBarang extends Controller
     function getBarangWithKategori($id_kategori){
         return $this->apiHandleRepository->safeApiCall(function()use($id_kategori){
             // dd($kode_barang);
-            $barang = MBarang::whereCreatedBy()->whereIdKategori($id_kategori)->get();
+            $barang = MBarang::whereIdKategori($id_kategori)->whereUser();
             $barang = BarangResource::collection($barang);
             return responseSuccess($barang);
         });
@@ -91,7 +91,7 @@ class CBarang extends Controller
         return $this->apiHandleRepository->safeApiCall(function(){
             // dd($kode_barang);
             $q = request()->query('q');
-            $barang = MBarang::whereCreatedBy()->where("nama_barang","like","%".$q."%")->get();
+            $barang = MBarang::where("nama_barang","like","%".$q."%")->whereUser();
             $barang = BarangResource::collection($barang);
             return responseSuccess($barang);
         });
