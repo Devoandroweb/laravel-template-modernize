@@ -82,8 +82,8 @@ class CBarang extends Controller
     function getBarangWithKategori($id_kategori){
         return $this->apiHandleRepository->safeApiCall(function()use($id_kategori){
             // dd($kode_barang);
+            dd($id_kategori);
             $barang = MBarang::whereIdKategori($id_kategori)->whereUser();
-            dd($barang);
             $barang = BarangResource::collection($barang);
             return responseSuccess($barang);
         });
