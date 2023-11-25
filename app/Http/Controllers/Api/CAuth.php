@@ -44,4 +44,5 @@ class CAuth extends Controller
             'access_token' => null,
         ], 200);
     }
+    
 }

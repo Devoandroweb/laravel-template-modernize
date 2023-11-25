@@ -55,7 +55,7 @@ class CUser extends Controller
             return responseSuccess($user);
         });
     }
-function updateFotoProfile($id_user) {
+    function updateFotoProfile($id_user) {
         return $this->apiHandleRepository->safeApiCall(function()use($id_user){
             if(request()->hasFile('foto')){
                 $nameFileFoto = uploadImage(public_path("images/user"),request()->file('foto'));
@@ -77,6 +77,17 @@ function updateFotoProfile($id_user) {
             $user->update();
 
             return responseSuccess(['message'=>'Sukses Mengubah Data Pengguna']);
+        });
+    }
+    function home(){
+        
+        return $this->apiHandleRepository->safeApiCall(function(){
+        $date = request()->date;
+        $sales = Sales::whereUser()->whereBetween('created_at',["1-".$date,"31-".$date])->get()->count();
+        $penjualan = Penjualan::whereUser()->whereBetween('created_at',["1-".$date,"31-".$date])->get()->count();
+        $pengembalian = PengembalianBarang::whereUser()->whereBetween('created_at',["1-".$date,"31-".$date])->get()->count();
+        $persediaan = Perseidaan::whereUser()->whereBetween('created_at',["1-".$date,"31-".$date])->get()->count();
+            return responseSuccess(compact("sales","penjualan","pengembalian","persediaan"));
         });
     }
 

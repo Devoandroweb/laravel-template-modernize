@@ -83,6 +83,7 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::post('update', 'update')->name('update');
         Route::post('create', 'create')->name('create');
         Route::post('delete', 'delete')->name('delete');
+        Route::post('home', 'home')->name('home');
     });
     Route::prefix('profile')
     ->name('profile.')
