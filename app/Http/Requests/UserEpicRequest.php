@@ -27,17 +27,17 @@ class UserEpicRequest extends FormRequest
     {
         $dataValidate = [
             'id_user'=>'nullable',
-            'nama_toko'=>'required',
-            'nama'=>'required',
+            'nama_toko'=>'required',#
+            'nama'=>'nullable',
             'email'=>'nullable',
-            'role'=>'required',
-            'username'=>'required',
-            'password'=>'required',
-            'alamat'=>'required',
-            'ttl'=>'required',
-            'tempat_lahir'=>'required',
-            'jk'=>'required',
-            'no_tlp'=>'required'
+            'role'=>'required',#
+            'username'=>'required',#
+            'password'=>'required',#
+            'alamat'=>'nullable',
+            'ttl'=>'nullable',
+            'tempat_lahir'=>'nullable',
+            'jk'=>'nullable',
+            'no_tlp'=>'nullable'
         ];
         if(is_null($this->id_user)){
             $dataValidate['username'] = 'unique:user,username|required';
