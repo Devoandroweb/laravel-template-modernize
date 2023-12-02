@@ -41,6 +41,7 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::post('delete', 'delete')->name('delete');
         Route::get('list-by-kategori/{id_kategori}', 'getBarangWithKategori');
         Route::get('dropdown-search', 'dropdownSearch');
+        Route::get('warning-refill', 'listWarningPersediaan');
     });
     Route::prefix('kategori')
     ->name('kategori.')

@@ -84,7 +84,7 @@ function convertDate($date, $withDay = true, $withMinute = true)
     }
     return $text;
 }
-function sendFCM($user) {
+function sendFCM($user,$dataPayload) {
     if(is_null($user->scm)){
         return false;
     }
@@ -108,10 +108,7 @@ function sendFCM($user) {
       'click_action' => "activities.NotifHandlerActivity" //Action/Activity - Optional
     ];
 
-    $dataPayload = ['to'=> 'My Name',
-    'points'=>80,
-    'other_data' => 'This is extra payload'
-    ];
+    
 
     // Create the api body
     $apiBody = [

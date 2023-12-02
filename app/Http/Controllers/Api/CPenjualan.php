@@ -25,6 +25,7 @@ class CPenjualan extends Controller
         return $this->apiHandleRepository->safeApiCall(function() use ($penjualanRequest){
             $credentials = $penjualanRequest->validated();
             if($this->systemEpicRepository->addPenjualanAndReduceStock($credentials)){
+                $this->systemEpicRepository->pushNotifWarningRefill();
                 return responseSuccess(['message'=>'Sukses Menambahkan Penjualan']);
             }else{
                 return responseFailed('ID Barang tidak ditemukan');

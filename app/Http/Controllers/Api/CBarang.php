@@ -32,6 +32,12 @@ class CBarang extends Controller
             return responseSuccess($barang);
         });
     }
+    function listWarningPersediaan() {
+
+        return $this->apiHandleRepository->safeApiCall(function(){
+            return responseSuccess($this->systemEpicRepository->listWarningRefillBarang());
+        });
+    }
     function create(BarangRequest $barangRequest) {
         return $this->apiHandleRepository->safeApiCall(function() use ($barangRequest){
             $credentials = $barangRequest->validated();

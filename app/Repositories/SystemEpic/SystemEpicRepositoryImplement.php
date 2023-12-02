@@ -11,6 +11,8 @@ use App\Models\SystemEpic;
 use App\Models\Penjualan;
 use App\Models\Persediaan;
 use App\Models\Sales;
+use App\Models\User;
+
 class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicRepository{
 
     /**
@@ -19,18 +21,21 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
     * @property Sales|mixed $sales;
     */
     protected $sales;
+    protected $mBarang;
     protected $persediaan;
     protected $penjualan;
     protected $pengembalianBarang;
 
     public function __construct(
         Sales $sales,
+        Mbarang $mBarang,
         Persediaan $persediaan,
         Penjualan $penjualan,
         PengembalianBarang $pengembalianBarang
     )
     {
         $this->sales = $sales;
+        $this->mBarang = $mBarang;
         $this->penjualan = $penjualan;
         $this->persediaan = $persediaan;
         $this->pengembalianBarang = $pengembalianBarang;
@@ -47,6 +52,12 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         }else{
             return false;
         }
+    }
+    function listWarningRefillBarang(){
+        $barangWarning = $this->mBarang->whereHas('persediaan', function($query) {
+            $query->where('jumlah_barang','<=','barang.minimal_persediaan');
+        })->get();
+        return $barangWarning;
     }
     function addPenjualanAndReduceStock($credentials) {
         $idBarang = $credentials['id_barang'];
@@ -157,5 +168,18 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         }
         return $result;
     }
-
+    function pushNotifWarningRefill(){
+        $countBarangRefill = $this->listWarningRefillBarang()->count();
+        $userAll = User::all();
+        foreach ($userAll as $user) {
+            $message = [
+                'title'=> 'Wayahe blonjo',
+                'points'=>80,
+                'body' => 'Wayahe ngisi barang lur, onok '.$countBarangRefill.' iki ndang isi, cok iiii'
+            ];
+            if(!sendFCM($user,$message)){
+                continue;
+            }
+        }
+    }
 }
