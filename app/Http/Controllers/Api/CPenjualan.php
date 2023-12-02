@@ -24,7 +24,10 @@ class CPenjualan extends Controller
     function create(PenjualanRequest $penjualanRequest) {
         return $this->apiHandleRepository->safeApiCall(function() use ($penjualanRequest){
             $credentials = $penjualanRequest->validated();
-            if($this->systemEpicRepository->addPenjualanAndReduceStock($credentials)){
+            $result = $this->systemEpicRepository->addPenjualanAndReduceStock($credentials);
+            if($result == 0){
+                return responseSuccess(['message'=>'Jumlah Barang tidak mencukupi']);
+            }elseif($result){
                 $this->systemEpicRepository->pushNotifWarningRefill();
                 return responseSuccess(['message'=>'Sukses Menambahkan Penjualan']);
             }else{

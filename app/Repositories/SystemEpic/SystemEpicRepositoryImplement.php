@@ -12,6 +12,7 @@ use App\Models\Penjualan;
 use App\Models\Persediaan;
 use App\Models\Sales;
 use App\Models\User;
+use App\Models\UserEpic;
 
 class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicRepository{
 
@@ -63,10 +64,15 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         $idBarang = $credentials['id_barang'];
         $persediaan = $this->persediaan->whereIdBarang($idBarang)->first();
         if($persediaan){
-            $persediaan->jumlah_barang -= (int)$credentials['jumlah_penjualan'];
-            $this->penjualan->create($credentials);
-            $persediaan->update();
-            return true;
+            $resultReduce = $persediaan->jumlah_barang - (int)$credentials['jumlah_penjualan'];
+            // dd($resultReduce,$resultReduce < 0);
+            if($resultReduce < 0){
+                return 0;
+            }else{
+                $this->penjualan->create($credentials);
+                $persediaan->update();
+                return true;
+            }
         }else{
             return false;
         }
@@ -170,7 +176,7 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
     }
     function pushNotifWarningRefill(){
         $countBarangRefill = $this->listWarningRefillBarang()->count();
-        $userAll = User::all();
+        $userAll = UserEpic::all();
         foreach ($userAll as $user) {
             $message = [
                 'title'=> 'Wayahe blonjo',

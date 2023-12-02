@@ -85,7 +85,8 @@ function convertDate($date, $withDay = true, $withMinute = true)
     return $text;
 }
 function sendFCM($user,$dataPayload) {
-    if(is_null($user->scm)){
+    if($user->fcm == ""){
+        // dd($user);
         return false;
     }
     // FCM API Url
@@ -108,7 +109,7 @@ function sendFCM($user,$dataPayload) {
       'click_action' => "activities.NotifHandlerActivity" //Action/Activity - Optional
     ];
 
-    
+
 
     // Create the api body
     $apiBody = [
@@ -117,7 +118,7 @@ function sendFCM($user,$dataPayload) {
       'time_to_live' => 600, // optional - In Seconds
       //'to' => '/topics/mytargettopic'
       //'registration_ids' = ID ARRAY
-      'to' => $user->scm
+      'to' => $user->fcm
     ];
 
     // Initialize curl with the prepared headers and body
@@ -130,9 +131,13 @@ function sendFCM($user,$dataPayload) {
 
     // Execute call and save result
     $result = curl_exec($ch);
-    print($result);
+    // print($result);
     // Close curl after call
     curl_close($ch);
-
-    return $result;
+    addLogFB($result,$dataPayload);
+  }
+  function addLogFB($result,$data){
+    // dd("okasda");
+    $logTxt = date('Y-m-d H:i:s')."| Status: ".$result." | send : ".json_encode($data);
+    file_put_contents('logs.txt', $logTxt . PHP_EOL, FILE_APPEND | LOCK_EX);
   }
