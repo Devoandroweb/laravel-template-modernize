@@ -20,6 +20,7 @@ class UserEpicResource extends JsonResource
             "nama" => $this->nama,
             "email" => $this->email,
             "username" => $this->username,
+            "password_show" => $this->password_show,
             "role" => $this->role,
             "foto" => url('public/images/user/'.$this->foto),
             "alamat" => $this->alamat,

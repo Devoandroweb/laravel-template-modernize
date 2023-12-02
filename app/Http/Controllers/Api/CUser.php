@@ -35,7 +35,6 @@ class CUser extends Controller
             UserEpic::create($credentials);
             return responseSuccess(['message'=>'Sukses Menambahkan Pengguna']);
         });
-
     }
     function update(UserEpicRequest $userEpicRequest) {
         return $this->apiHandleRepository->safeApiCall(function() use ($userEpicRequest){
@@ -84,7 +83,7 @@ class CUser extends Controller
         });
     }
     function home(){
-        
+
         return $this->apiHandleRepository->safeApiCall(function(){
             $date = request()->date;
             $wherDate = [$date."-1",$date."-31"];
