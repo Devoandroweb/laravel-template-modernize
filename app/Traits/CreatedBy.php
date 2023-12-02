@@ -7,9 +7,11 @@ use Laravel\Sanctum\PersonalAccessToken;
 trait CreatedBy
 {
     static function whereUser(){
-        if(request('id_user') != 0){
-            if(request()->user()->role != 1){
-                return self::where('created_by',request()->user()?->id_user);
+        if(request()->user()->role != 1){ #bukan admin
+            return self::where('created_by',request()->user()?->id_user);
+        }else{
+            if(request('id_user') != 0){
+                return self::where('created_by',request('id_user'));
             }
         }
         return new static;

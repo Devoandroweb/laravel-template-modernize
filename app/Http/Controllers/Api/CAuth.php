@@ -44,5 +44,28 @@ class CAuth extends Controller
             'access_token' => null,
         ], 200);
     }
-    
+    public function tokenFCM(Request $request)
+    {
+        if($request->user()->fcm){
+            return response()->json([
+                'status' => TRUE,
+                'message' => "Token FCM already",
+            ], 200);
+        }
+        return response()->json([
+            'status' => FALSE,
+            'message' => "Token FCM Not already",
+        ], 200);
+    }
+    public function updateTokenFCM(Request $request)
+    {
+        $user = $request->user();
+        $user->fcm = $request->token_firebase;
+        $user->update();
+        return response()->json([
+            'status' => TRUE,
+            'message' => "Token FCM Has been Updated",
+        ], 200);
+    }
+
 }

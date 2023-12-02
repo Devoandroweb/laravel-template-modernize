@@ -28,6 +28,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('auth', [CAuth::class,'authenticated']);
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('logout', [CAuth::class,'logout']);
+    Route::get('check-token-firebase', [CAuth::class,'tokenFCM']);
+    Route::post('update-token-firebase', [CAuth::class,'updateTokenFCM']);
     Route::prefix('barang')
     ->name('barang.')
     ->controller(CBarang::class)
