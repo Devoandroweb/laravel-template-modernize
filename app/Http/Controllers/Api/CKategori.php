@@ -23,8 +23,9 @@ class CKategori extends Controller
     function create(KategoriRequest $kategoriRequest) {
         return $this->apiHandleRepository->safeApiCall(function() use ($kategoriRequest){
             $credentials = $kategoriRequest->validated();
-            // dd($credentials);
-            MKategori::create($credentials);
+
+            $kategori = MKategori::create($credentials);
+            updatedCreatedBy($kategori);
             return responseSuccess(['message'=>'Sukses Menambahkan Kategori']);
         });
 

@@ -36,7 +36,6 @@ class CPengembalianBarang extends Controller
     function list() {
         return $this->apiHandleRepository->safeApiCall(function(){
             $pengembalian = PengembalianBarang::whereUser()->whereHas('barang')->get();
-
             $pengembalian = PengembalianBarangResource::collection($pengembalian);
             return responseSuccess($pengembalian);
         });

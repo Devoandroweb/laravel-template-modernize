@@ -43,11 +43,13 @@ class CBarang extends Controller
             $credentials = $barangRequest->validated();
             // dd($credentials);
             DB::transaction(function() use ($credentials) {
-                $barang = MBarang::create($credentials);
+                // dd(request()->user()?->id_user);
 
+                $barang = MBarang::create($credentials);
                 Persediaan::create([
                     'id_barang' => $barang->id_barang,
                 ]);
+                updatedCreatedBy($barang);
             });
             DB::commit();
             return responseSuccess(['message'=>'Sukses Menambahkan Barang']);

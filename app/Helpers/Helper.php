@@ -141,3 +141,9 @@ function sendFCM($user,$dataPayload) {
     $logTxt = date('Y-m-d H:i:s')."| Status: ".$result." | send : ".json_encode($data);
     file_put_contents('logs.txt', $logTxt . PHP_EOL, FILE_APPEND | LOCK_EX);
   }
+function updatedCreatedBy($model)
+{
+    $user = request()->user();
+    $model->created_by = $user?->id_user;
+    $model->update();
+}

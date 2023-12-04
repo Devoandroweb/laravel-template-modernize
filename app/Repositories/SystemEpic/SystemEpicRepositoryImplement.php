@@ -47,8 +47,9 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         // dd($persediaan);
         if($persediaan){
             $persediaan->jumlah_barang += (int)$credentials['jumlah_sales'];
-            $this->sales->create($credentials);
-            $persediaan->update();
+            $sales = $this->sales->create($credentials);
+            updatedCreatedBy($sales);
+            updatedCreatedBy($persediaan);
             return true;
         }else{
             return false;
@@ -69,8 +70,9 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
             if($resultReduce < 0){
                 return 0;
             }else{
-                $this->penjualan->create($credentials);
-                $persediaan->update();
+                $penjualan = $this->penjualan->create($credentials);
+                updatedCreatedBy($penjualan);
+                updatedCreatedBy($persediaan);
                 return true;
             }
         }else{
@@ -83,8 +85,9 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
 
         if($persediaan){
             $persediaan->jumlah_barang -= (int)$credentials['jumlah_barang'];
-            $this->pengembalianBarang->create($credentials);
-            $persediaan->update();
+            $pengembalian = $this->pengembalianBarang->create($credentials);
+            updatedCreatedBy($persediaan);
+            updatedCreatedBy($pengembalian);
             return true;
         }else{
             return false;

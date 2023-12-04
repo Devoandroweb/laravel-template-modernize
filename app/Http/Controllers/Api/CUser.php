@@ -32,7 +32,8 @@ class CUser extends Controller
     function create(UserEpicRequest $userEpicRequest) {
         return $this->apiHandleRepository->safeApiCall(function() use ($userEpicRequest){
             $credentials = $userEpicRequest->validated();
-            UserEpic::create($credentials);
+            $user = UserEpic::create($credentials);
+            updatedCreatedBy($user);
             return responseSuccess(['message'=>'Sukses Menambahkan Pengguna']);
         });
     }

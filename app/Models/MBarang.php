@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Traits\CreatedBy;
+use App\Traits\CreatedUpdatedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class MBarang extends Model
 {
-    use HasFactory, CreatedBy;
+    use HasFactory, CreatedBy, CreatedUpdatedBy;
     protected $table = 'barang';
     protected $primaryKey = 'id_barang';
     protected $fillable = ['kode_barang','nama_barang', 'satuan', 'id_kategori', 'minimal_persediaan'];
