@@ -21,7 +21,7 @@ trait CreatedBy
     }
     public static function bootCreatedUpdatedBy()
     {
-
+        dd(request()->user()?->id_user);
         // updating created_by and updated_by when model is created
         static::creating(function ($model) {
             if (!$model->isDirty('created_by')) {
