@@ -22,7 +22,7 @@ class BarangResource extends JsonResource
             "id_kategori"=>$this->kategori?->id_kategori ?? 0,
             "nama_kategori"=>$this->kategori?->nama_kategori ?? "-",
             "minimal_persediaan"=>$this->minimal_persediaan,
-            "persediaan"=>$this->persediaan->jumlah_barang ?? 0,
+            "persediaan"=>$this->persediaan?->jumlah_barang ?? 0,
         ];
     }
 }

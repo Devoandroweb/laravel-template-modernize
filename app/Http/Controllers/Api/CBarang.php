@@ -100,7 +100,8 @@ class CBarang extends Controller
         return $this->apiHandleRepository->safeApiCall(function(){
             // dd($kode_barang);
             $q = request()->query('q');
-            $barang = MBarang::where("nama_barang","like","%".$q."%")->whereUser()->get();
+            $barang = MBarang::whereUser()->where("nama_barang","like","%".$q."%")->get();
+            // dd($barang);
             $barang = BarangResource::collection($barang);
             return responseSuccess($barang);
         });
