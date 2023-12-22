@@ -177,9 +177,9 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         }
         return $result;
     }
-    function pushNotifWarningRefill(){
+    function pushNotifWarningRefill($id_user){
         $countBarangRefill = $this->listWarningRefillBarang()->count();
-        $userAll = UserEpic::all();
+        $userAll = UserEpic::where('role',1)->orWhere('id_user',$id_user)->get();
         foreach ($userAll as $user) {
             $message = [
                 'title'=> 'Wayahe blonjo',
