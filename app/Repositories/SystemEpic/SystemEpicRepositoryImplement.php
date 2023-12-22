@@ -71,6 +71,8 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
                 return 0;
             }else{
                 $penjualan = $this->penjualan->create($credentials);
+                $persediaan->jumlah_barang = $resultReduce;
+                $persediaan->update();
                 updatedCreatedBy($penjualan);
                 updatedCreatedBy($persediaan);
                 return true;
