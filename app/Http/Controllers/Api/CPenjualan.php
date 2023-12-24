@@ -25,6 +25,7 @@ class CPenjualan extends Controller
         return $this->apiHandleRepository->safeApiCall(function() use ($penjualanRequest){
             $credentials = $penjualanRequest->validated();
             $result = $this->systemEpicRepository->addPenjualanAndReduceStock($credentials);
+            dd($result);
             if($result == 0){
                 $this->systemEpicRepository->pushNotifWarningRefill(request()->user()?->id_user);
                 return responseFailed(['message'=>'Sukses Menambahkan Penjualan']);

@@ -67,7 +67,7 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         if($persediaan){
             if($persediaan->barang){
                 $resultReduce = $persediaan->jumlah_barang - (int)$credentials['jumlah_penjualan'];
-                dd($resultReduce);
+                
                 if($resultReduce < 0){
                     return -1;
                 }
