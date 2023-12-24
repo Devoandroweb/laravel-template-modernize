@@ -59,7 +59,7 @@ class CAuth extends Controller
     }
     public function tokenFCM(Request $request)
     {
-        if($request->user()->fcm){
+        if($request->user()->fcm == $request->token_fcm){
             return response()->json([
                 'status' => TRUE,
                 'message' => "Token FCM already",
