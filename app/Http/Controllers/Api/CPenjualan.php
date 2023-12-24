@@ -27,6 +27,8 @@ class CPenjualan extends Controller
             $result = $this->systemEpicRepository->addPenjualanAndReduceStock($credentials);
             if($result == 0){
                 $this->systemEpicRepository->pushNotifWarningRefill(request()->user()?->id_user);
+                return responseFailed(['message'=>'Jumlah Barang tidak boleh di bawah minimal persediaan']);
+            }elseif($result == -1){
                 return responseFailed(['message'=>'Jumlah Barang tidak mencukupi']);
             }elseif($result){
                 return responseSuccess(['message'=>'Sukses Menambahkan Penjualan']);
