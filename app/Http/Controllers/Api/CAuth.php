@@ -21,7 +21,17 @@ class CAuth extends Controller
             }
 
             $user = Auth::guard('cris')->user();
+            if($user->is_login == 1){
+                return response()->json([
+                    'status' => FALSE,
+                    'message' => "Sudah login di perangkat lain",
+                    'data' => null,
+                    'access_token' => null,
+                ], 200);
+            }
             $authToken = $user->createToken('auth_token')->plainTextToken;
+            $user->is_login = 1;
+            $user->update();
             $data = ['status'=>TRUE,'message' => 'Berhasil Login', 'access_token' => $authToken, 'token_type' => 'Bearer','user'=>$user];
             return response()->json($data, 200);
         } catch (\Throwable $th) {
