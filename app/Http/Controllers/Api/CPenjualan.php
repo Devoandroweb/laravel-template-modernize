@@ -31,7 +31,7 @@ class CPenjualan extends Controller
             }elseif($result){
                 return responseSuccess(['message'=>'Sukses Menambahkan Penjualan']);
             }else{
-                return responseFailed('ID Barang tidak ditemukan');
+                return responseFailed('Barang tidak ditemukan');
             };
         });
     }
