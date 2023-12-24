@@ -45,7 +45,10 @@ class CAuth extends Controller
     }
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        $user = $request->user();
+        $user->currentAccessToken()->delete();
+        $user->is_login = 0;
+        $user->update();
 
         return response()->json([
             'status' => TRUE,
