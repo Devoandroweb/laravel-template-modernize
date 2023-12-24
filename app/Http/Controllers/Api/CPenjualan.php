@@ -28,7 +28,7 @@ class CPenjualan extends Controller
             // dd($result === -1);
             if($result === 0){
                 $this->systemEpicRepository->pushNotifWarningRefill(request()->user()?->id_user);
-                return responseFailed(['message'=>'Sukses Menambahkan Penjualan']);
+                return responseSuccess(['message'=>'Sukses Menambahkan Penjualan']);
             }elseif($result === -1){
                 return responseFailed(['message'=>'Jumlah Barang tidak mencukupi']);
             }elseif($result){
