@@ -85,6 +85,7 @@ function convertDate($date, $withDay = true, $withMinute = true)
     return $text;
 }
 function sendFCM($user,$dataPayload) {
+    
     if($user->fcm == ""){
         // dd($user);
         return false;
@@ -134,11 +135,11 @@ function sendFCM($user,$dataPayload) {
     // print($result);
     // Close curl after call
     curl_close($ch);
-    addLogFB($result,$dataPayload);
+    addLogFB($result,$dataPayload,$user->id_user);
   }
-  function addLogFB($result,$data){
+  function addLogFB($result,$data,$id_user){
     // dd("okasda");
-    $logTxt = date('Y-m-d H:i:s')."| Status: ".$result." | send : ".json_encode($data);
+    $logTxt = date('Y-m-d H:i:s')."| id_user : ".$id_user."| Status: ".$result." | send : ".json_encode($data);
     file_put_contents('logs.txt', $logTxt . PHP_EOL, FILE_APPEND | LOCK_EX);
   }
 function updatedCreatedBy($model)
