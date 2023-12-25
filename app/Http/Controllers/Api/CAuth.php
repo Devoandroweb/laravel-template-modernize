@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserEpic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -78,6 +79,16 @@ class CAuth extends Controller
         return response()->json([
             'status' => TRUE,
             'message' => "Token FCM Has been Updated",
+        ], 200);
+    }
+    public function resetIsLogin(Request $request)
+    {
+        $user = UserEpic::find($request->id_user);
+        $user->is_login = 0;
+        $user->update();
+        return response()->json([
+            'status' => TRUE,
+            'message' => "Reset is Login berhasil",
         ], 200);
     }
 
