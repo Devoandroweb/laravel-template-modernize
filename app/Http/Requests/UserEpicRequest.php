@@ -37,7 +37,9 @@ class UserEpicRequest extends FormRequest
             'ttl'=>'nullable',
             'tempat_lahir'=>'nullable',
             'jk'=>'nullable',
-            'no_tlp'=>'nullable'
+            'no_tlp'=>'nullable',
+            'is_active'=>'nullable',
+            'is_login'=>'nullable',
         ];
         if(is_null($this->id_user)){
             $dataValidate['username'] = 'unique:user,username|required';

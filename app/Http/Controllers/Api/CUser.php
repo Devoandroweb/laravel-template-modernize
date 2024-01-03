@@ -95,5 +95,13 @@ class CUser extends Controller
             return responseSuccess(compact("sales","penjualan","pengembalian","persediaan"));
         });
     }
+    function reactive($id_user,$value){
+        return $this->apiHandleRepository->safeApiCall(function()use($id_user){
+            $user = UserEpic::find($id_user);
+            $user->enable = $value;
+            $user->update();
+            return responseSuccess(['message'=>'Sukses Mengubah Data Pengguna']);
+        });
+    }
 
 }
