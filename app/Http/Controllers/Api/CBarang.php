@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BarangRequest;
 use App\Http\Resources\BarangResource;
+use App\Http\Resources\ListWarningRefillResource;
 use App\Models\MBarang;
 use App\Models\Persediaan;
 use App\Repositories\ApiHandle\ApiHandleRepository;
@@ -36,7 +37,7 @@ class CBarang extends Controller
 
         return $this->apiHandleRepository->safeApiCall(function(){
             $listWarningRefillBarang = $this->systemEpicRepository->listWarningRefillBarang();
-            
+            $listWarningRefillBarang = ListWarningRefillResource::collection($listWarningRefillBarang);
             return responseSuccess($listWarningRefillBarang);
         });
     }
