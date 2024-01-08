@@ -55,16 +55,10 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
             return false;
         }
     }
-    function listWarningRefillBarang($id_user){
-        if($id_user != 0){
-            $barangWarning = $this->mBarang->whereHas('persediaan', function($query) {
-                $query->where('jumlah_barang','<=','barang.minimal_persediaan');
-            })->whereUser()->get();
-        }else{
-            $barangWarning = $this->mBarang->whereHas('persediaan', function($query) {
-                $query->where('jumlah_barang','<=','barang.minimal_persediaan');
-            })->get();
-        }
+    function listWarningRefillBarang(){
+        $barangWarning = $this->mBarang->whereHas('persediaan', function($query) {
+            $query->where('jumlah_barang','<=','barang.minimal_persediaan');
+        })->whereUser()->get();
         
 
         return $barangWarning;
