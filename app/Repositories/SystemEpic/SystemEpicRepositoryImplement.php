@@ -60,7 +60,6 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         $barangWarning = $this->mBarang->whereUser()->whereHas('persediaan', function($query) {
             $query->where('jumlah_barang','<=','barang.minimal_persediaan');
         })->get();
-        
 
         return $barangWarning;
     }
