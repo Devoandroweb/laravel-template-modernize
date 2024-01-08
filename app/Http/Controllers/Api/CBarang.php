@@ -35,7 +35,8 @@ class CBarang extends Controller
     function listWarningPersediaan() {
 
         return $this->apiHandleRepository->safeApiCall(function(){
-            return responseSuccess($this->systemEpicRepository->listWarningRefillBarang());
+
+            return responseSuccess($this->systemEpicRepository->listWarningRefillBarang(request()->user()?->id_user));
         });
     }
     function create(BarangRequest $barangRequest) {

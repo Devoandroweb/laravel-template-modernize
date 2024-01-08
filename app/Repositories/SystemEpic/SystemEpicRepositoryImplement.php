@@ -55,10 +55,18 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
             return false;
         }
     }
-    function listWarningRefillBarang(){
-        $barangWarning = $this->mBarang->whereHas('persediaan', function($query) {
-            $query->where('jumlah_barang','<=','barang.minimal_persediaan');
-        })->get();
+    function listWarningRefillBarang($id_user){
+        if($id_user != 0){
+            $barangWarning = $this->mBarang->whereHas('persediaan', function($query) {
+                $query->where('jumlah_barang','<=','barang.minimal_persediaan');
+            })->whereUser()->get();
+        }else{
+            $barangWarning = $this->mBarang->whereHas('persediaan', function($query) {
+                $query->where('jumlah_barang','<=','barang.minimal_persediaan');
+            })->get();
+        }
+        
+
         return $barangWarning;
     }
     function addPenjualanAndReduceStock($credentials) {
@@ -187,14 +195,13 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         return $result;
     }
     function pushNotifWarningRefill($id_user){
-        $countBarangRefill = $this->listWarningRefillBarang()->count();
         $userAll = UserEpic::where('role',1)->orWhere('id_user',$id_user)->get();
-        // dd($userAll);
+
         foreach ($userAll as $user) {
             $message = [
-                'title'=> 'Wayahe blonjo',
+                'title'=> 'Persediaan Barang',
                 'points'=>80,
-                'body' => 'Wayahe ngisi barang lur, onok '.$countBarangRefill.' iki ndang isi, cok iiii'
+                'body' => 'ada barang yang perlu di belanjain nih'
             ];
             if(!sendFCM($user,$message)){
                 continue;

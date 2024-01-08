@@ -14,6 +14,6 @@ interface SystemEpicRepository extends Repository{
     function reducePenjualanAndStock($id_penjualan);
     function getStatistic();
     function getReportPenjualan();
-    function listWarningRefillBarang();
+    function listWarningRefillBarang($id_user);
     function pushNotifWarningRefill($id_user);
 }
