@@ -13,6 +13,7 @@ use App\Models\Persediaan;
 use App\Models\Sales;
 use App\Models\User;
 use App\Models\UserEpic;
+use Illuminate\Support\Facades\DB;
 
 class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicRepository{
 
@@ -58,7 +59,7 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
     function listWarningRefillBarang(){
 
         $barangWarning = MBarang::whereUser()->whereHas('persediaan', function($query) {
-            return $query->where('jumlah_barang','<=',70);
+            $query->where('jumlah_barang', '<=', DB::raw('barang.minimal_persediaan'));
         })->get();
 
         return $barangWarning;
