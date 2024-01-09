@@ -11,6 +11,7 @@ trait CreatedBy
         if(request()->user()->role != 1){ #owner
             return self::orderBy('created_at','desc');
         }else{ # admin
+            dd(request()->user());
             if(request()->user()){
                 return self::where('created_by',request()->user()?->id_user)->orderBy('created_at','desc');
             }
