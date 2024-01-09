@@ -58,7 +58,7 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
     function listWarningRefillBarang(){
 
         $barangWarning = MBarang::whereUser()->whereHas('persediaan', function($query) {
-            return $query->where('jumlah_barang','<=','barang.minimal_persediaan');
+            return $query->where('jumlah_barang','<=',70);
         })->get();
 
         return $barangWarning;
