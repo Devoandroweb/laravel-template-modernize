@@ -56,7 +56,7 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         }
     }
     function listWarningRefillBarang(){
-        
+
         $barangWarning = $this->mBarang->whereUser()->whereHas('persediaan', function($query) {
             $query->where('jumlah_barang','<=','barang.minimal_persediaan');
         })->get();
@@ -69,17 +69,19 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
         if($persediaan){
             if($persediaan->barang){
                 $resultReduce = $persediaan->jumlah_barang - (int)$credentials['jumlah_penjualan'];
-                
+
                 if($resultReduce < 0){
                     return -1;
                 }
-                $penjualan = $this->penjualan->create($credentials);
+
                 $persediaan->jumlah_barang = $resultReduce;
                 $persediaan->update();
                 // dd($persediaan->jumlah_barang <= $persediaan->barang?->persediaan_minimal,$persediaan->jumlah_barang,$persediaan->barang?->persediaan_minimal);
                 if($persediaan->jumlah_barang <= $persediaan->barang?->minimal_persediaan){
                     return 0; // return untuk notif
                 }
+                dd($credentials);
+                $penjualan = $this->penjualan->create($credentials);
                 updatedCreatedBy($penjualan);
                 updatedCreatedBy($persediaan);
                 return true;
