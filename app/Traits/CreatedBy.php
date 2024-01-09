@@ -9,9 +9,11 @@ trait CreatedBy
     static function whereUser(){
 
         if(request()->user()->role != 1){ #owner
+            if(request()->query('id_user')){
+                return self::where('created_by',request()->query('id_user'))->orderBy('created_at','desc');
+            }
             return self::orderBy('created_at','desc');
         }else{ # admin
-            
             if(request()->user()){
                 return self::where('created_by',request()->user()?->id_user)->orderBy('created_at','desc');
             }
