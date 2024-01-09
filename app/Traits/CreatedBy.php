@@ -7,6 +7,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 trait CreatedBy
 {
     static function whereUser(){
+        dd(request()->user());
         if(request()->user()->role != 1){ #bukan admin
             return self::where('created_by',request()->user()?->id_user)->orderBy('created_at','desc');
         }else{
