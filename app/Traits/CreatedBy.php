@@ -7,12 +7,12 @@ use Laravel\Sanctum\PersonalAccessToken;
 trait CreatedBy
 {
     static function whereUser(){
-        
+
         if(request()->user()->role != 1){ #owner
             return self::orderBy('created_at','desc');
         }else{ # admin
-            if(request('id_user') != 0){
-                return self::where('created_by',request('id_user'))->orderBy('created_at','desc');
+            if(request()->user()){
+                return self::where('created_by',request()->user()?->id_user)->orderBy('created_at','desc');
             }
         }
         return new static;
@@ -20,5 +20,5 @@ trait CreatedBy
     static function whereCreatedBy(){
         return parent::where('created_by',request()->user()?->id_user);
     }
-    
+
 }
