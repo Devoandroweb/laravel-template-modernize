@@ -80,8 +80,9 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
                 if($persediaan->jumlah_barang <= $persediaan->barang?->minimal_persediaan){
                     return 0; // return untuk notif
                 }
-                dd($credentials);
+                // dd($credentials);
                 $penjualan = $this->penjualan->create($credentials);
+                dd($penjualan);
                 updatedCreatedBy($penjualan);
                 updatedCreatedBy($persediaan);
                 return true;
