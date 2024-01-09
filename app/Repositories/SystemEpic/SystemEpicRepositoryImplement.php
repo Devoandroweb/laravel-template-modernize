@@ -29,7 +29,7 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
 
     public function __construct(
         Sales $sales,
-        Mbarang $mBarang,
+        MBarang $mBarang,
         Persediaan $persediaan,
         Penjualan $penjualan,
         PengembalianBarang $pengembalianBarang
@@ -57,9 +57,9 @@ class SystemEpicRepositoryImplement extends Eloquent implements SystemEpicReposi
     }
     function listWarningRefillBarang(){
 
-        $barangWarning = $this->mBarang->whereHas('persediaan', function($query) {
+        $barangWarning = MBarang::whereUser()->whereHas('persediaan', function($query) {
             $query->where('jumlah_barang','<=','barang.minimal_persediaan');
-        })->whereUser()->get();
+        })->get();
 
         return $barangWarning;
     }
