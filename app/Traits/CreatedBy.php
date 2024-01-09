@@ -8,7 +8,7 @@ trait CreatedBy
 {
     static function whereUser(){
 
-        if(request()->user()->role != 1){ #owner
+        if(request()->user()->role == 1){ #owner
             if(request('id_user')){
                 return self::where('created_by',request('id_user'))->orderBy('created_at','desc');
             }
